@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>大數字除法演算法——Newton 法 ê 變形 | 北郊獨語 - Yoxem&#39;s Blog</title>
+  <meta name="author" content="Yoxem Chen">
+  
+  <meta name="description" content="（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）
+說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&amp;gt;&amp;gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="大數字除法演算法——Newton 法 ê 變形"/>
+  <meta property="og:site_name" content="北郊獨語 - Yoxem&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "大數字除法演算法——Newton 法 ê 變形",
+       "datePublished": "2019-10-12T00:00:00+08:00",
+       "dateModified" : "2023-06-13T10:14:58+08:00",
+      "author": [{
+          "@type": "Person",
+          "name": "Yoxem Chen",
+          "url": "https://kianting.info"
+        }],
+       "keywords" :    ["資訊","Holo話","數學"] ,
+      "abstract" : "（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？",
+      "text" : "（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？\n一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \\in Z , Z &#x3D;  { x \\mid x \\in 𝑵 \\bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。\n咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \\approx N &#x2F; D$ ，mā 近倚商數矣。\n但是有一个問題：$D^{-1}$是小數，欲按怎算 leh？\n一个方法著是 kā $\\frac{1}{D}$ 乘以 $a^p$（就是放大），算出 $\\frac{a^p}{D}$ ê 近似數 $y_k$，按呢 $Ny_k \\approx \\frac{Na^p}{D}$。koh 設定 $ x 向正爿徙 p 位 :&#x3D; x_a \\gg p &#x3D; x &#x2F;&#x2F; a^p$；其中$a &#x2F;&#x2F; b &#x3D; a 除以 b~ê 商數$），就通得著 $Ny_k \\gg p \\approx \\frac{Na^p}{D} &#x2F;&#x2F; a^p \\approx N&#x2F;D$。\n$p$ ê size[sài-suh] 著偌大？我認為參考這篇文章 (pdf)，會 tàng 要求 $\\frac{N}{D} - Nx \\leq 1$，\n而且因為 $N &lt; a^{length(N)}$，tī $N\\neq 0$ ê 時，tiō 有\n$$\\frac{1}{D} - x &lt; a^{-length{N}}$$\n咱欲予 $\\frac{a^p}{D} - xa^p $ tī $\\frac{1}{D} \\neq x$ ê 時，會當用整數加減計算，所以通 kā 設定做 $\\frac{a^p}{D} - xa^p &#x3D; a^p(\\frac{1}{D}-x) &lt; a^1$，按呢比較一下， $a^p &#x3D; a^{1+length(N)}$。所以 $p$ 通設定做 $1+length(N）$。\nBeh 揣 $y_k \\approx \\frac{a^p}{D}$，通用 $f(y) &#x3D; \\frac{1}{y} - \\frac{D}{a^p}（其中 p &#x3D; 1+length(N)）$ kap Newton 法計算伊 ê 近似解。\ntiō有\n$y_{k+1} &#x3D; y_k - \\frac{f(y)}{f’(y)} &#x3D; y_k - \\frac{\\frac{1}{y_k} - \\frac{D}{a^p}}{-y_k^{-2}} &#x3D; 2y_k - \\frac{y_k^2D}{a^p}$。\n（拄開始通設定 $y_0&#x3D;1$）\n會當 kā $\\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：\n$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$\n範例設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。\n$$\\begin{align*}&amp; y_0 &#x3D; 1 \\\n&amp; y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 \\\n&amp; y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 \\\n&amp; 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, \\\n&amp; y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189\n\\end{align*}$$\n因為 $y_15 &#x3D; y_16 &#x3D; 2189$，計算結束。所以\n$$Ny_16 &#x3D; 188177385, N&#x2F;&#x2F;D \\approx Ny_16&#x2F;&#x2F;a^{length(N)} &#x3D; 188。$$\n比較 $N&#x2F;D \\approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。\n毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。\n "
+    }
+    </script>
+
+
+
+  <link href="/favicon.ico" rel="icon" type="image/x-ico">
+  <link rel="alternate" href="/atom.xml" title="北郊獨語 - Yoxem&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<meta name="google-site-verification" content="3t0bNOKnnsVyNpsfuM7Vi6gf-6tY_MUeOpXmJzDZ_P8" /> <!-- google search opt.-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">北郊獨語 - Yoxem&#39;s Blog</a></h1>
+  <h2 class="subtitle">溪埔的石仔、山嶺的果樹之間，version 3.0</h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home 首頁</a></li>
+    
+      <li><a href="/archives">Archives 彙整</a></li>
+    
+      <li><a href="/about.html">About 關於</a></li>
+    
+      <li><a href="/googlephoto.html">Albums 相簿</a></li>
+    
+      <li><a href="/blogroll.html">Blogroll 聯播</a></li>
+    
+      <li><a href="/atom.xml">RSS</a></li>
+    
+      <li><a target="_blank" rel="noopener" href="http://yoxemblog.wordpress.com">Old Articles 舊文章</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2019-10-11T16:00:00.000Z"><a href="/2019/10/12/tua7soo3ji7tu5huat4ian2sng3huat4/">2019-10-12</a></time>
+      
+      
+  
+    <h1 class="title">大數字除法演算法——Newton 法 ê 變形</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        
+          <div class="toc" style="font-size: 100%; border-style:solid; border-width 0.1px; border-color: #787878; float: right; width: 25%; padding: 20px;border-width: 1px; border-margin: 10px;margin-left: 10px;margin-bottom: 10px; background: #f6f7f9;"><span style="text-align:center;font-weight:bold;">目錄</span>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AA%AA%E6%98%8E"><span class="toc-text">說明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
+          </div>
+        
+      <p><strong>（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）</strong></p>
+<h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？<span id="more"></span></p>
+<p>一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \in Z , Z &#x3D;  { x \mid x \in 𝑵 \bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。</p>
+<p>咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \approx N &#x2F; D$ ，mā 近倚商數矣。</p>
+<p>但是有一个問題：$D^{-1}$是小數，欲按怎算 leh？</p>
+<p>一个方法著是 kā $\frac{1}{D}$ 乘以 $a^p$（就是放大），算出 $\frac{a^p}{D}$ ê 近似數 $y_k$，按呢 $Ny_k \approx \frac{Na^p}{D}$。koh 設定 $ x 向正爿徙 p 位 :&#x3D; x_a \gg p &#x3D; x &#x2F;&#x2F; a^p$；其中$a &#x2F;&#x2F; b &#x3D; a 除以 b~ê 商數$），就通得著 $Ny_k \gg p \approx \frac{Na^p}{D} &#x2F;&#x2F; a^p \approx N&#x2F;D$。</p>
+<p>$p$ ê <ruby><rb>size</rb><rp>[</rp><rt>sài-suh</rt><rp>]</rp></ruby> 著偌大？我認為參考<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/12_Ffw1yxrMXkxQ92L6JQYK8gSM_Rv5yJ/edit">這篇文章</a> (pdf)，會 tàng 要求 $\frac{N}{D} - Nx \leq 1$，</p>
+<p>而且因為 $N &lt; a^{length(N)}$，tī $N\neq 0$ ê 時，tiō 有</p>
+<p>$$\frac{1}{D} - x &lt; a^{-length{N}}$$</p>
+<p>咱欲予 $\frac{a^p}{D} - xa^p $ tī $\frac{1}{D} \neq x$ ê 時，會當用整數加減計算，所以通 kā 設定做 $\frac{a^p}{D} - xa^p &#x3D; a^p(\frac{1}{D}-x) &lt; a^1$，按呢比較一下， $a^p &#x3D; a^{1+length(N)}$。所以 $p$ 通設定做 $1+length(N）$。</p>
+<p>Beh 揣 $y_k \approx \frac{a^p}{D}$，通用 $f(y) &#x3D; \frac{1}{y} - \frac{D}{a^p}（其中 p &#x3D; 1+length(N)）$ kap Newton 法計算伊 ê 近似解。</p>
+<p>tiō有</p>
+<p>$y_{k+1} &#x3D; y_k - \frac{f(y)}{f’(y)} &#x3D; y_k - \frac{\frac{1}{y_k} - \frac{D}{a^p}}{-y_k^{-2}} &#x3D; 2y_k - \frac{y_k^2D}{a^p}$。</p>
+<p>（拄開始通設定 $y_0&#x3D;1$）</p>
+<p>會當 kā $\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：</p>
+<p>$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$</p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。</p>
+<p>$$<br>\begin{align*}<br>&amp; y_0 &#x3D; 1 \</p>
+<p>&amp; y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 \</p>
+<p>&amp; y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 \</p>
+<p>&amp; 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, \</p>
+<p>&amp; y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189</p>
+<p>\end{align*}<br>$$</p>
+<p>因為 $y_15 &#x3D; y_16 &#x3D; 2189$，計算結束。所以</p>
+<p>$$Ny_16 &#x3D; 188177385, N&#x2F;&#x2F;D \approx Ny_16&#x2F;&#x2F;a^{length(N)} &#x3D; 188。$$</p>
+<p>比較 $N&#x2F;D \approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。</p>
+<p>毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。</p>
+<script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/Blog/">Blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/資訊/">資訊</a>, <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/數學/">數學</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  <!-- hexo-list-related-posts -->
+
+<div style="margin-top: 0px; border-top: 1px solid #ddd; padding-top: 26px">    
+ <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2017/06/30/eng7tortsiunn7ptt/">用tor上ptt</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2018/03/04/silee5kai3siau7kap4an1tsong1/">SILE 的介紹佮安裝</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/01/14/schemee5callcce5iong7huatki2le7-1/">Scheme ê call/cc ê 用法舉例(1)——例外處理</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/11/10/A-script-to-auto-detect-laptop-battery-and-warning/">偵測 Linux 筆記型電腦電量 ê 程式</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/06/21/an1tsng1racketllvm/">安裝 Racket-llvm</a></li></ul>    </div>
+        
+
+  </div>
+
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <!-- the license of the file is under cc by-sa 3.0 by RobG and Yoxem et al.-->
+<div class="search">
+
+  <form name="search_form" action="//google.com/search" method="get" accept-charset="utf-8" class="search-form" onsubmit="search_form.q.value = search_form.hq.value + search_form.q.value "><!-- the source code in the line is modified from RobG's under CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/) -->
+    <input type="search" name="hq" results="0" value="" placeholder="Search" class="search-form-input">
+	<!-- custom add the url of yoxem's old blog -->
+<input name="q" type="hidden" value=" site:yoxem.github.io OR site:yoxemblog.wordpress.com">
+
+
+
+ </form>
+</div>
+ 
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Categories</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/Blog/">Blog</a><small>140</small></li>
+  
+    <li><a href="/categories/上代blog的文章/">上代blog的文章</a><small>5</small></li>
+  
+    <li><a href="/categories/家私-tools/">家私 (tools)</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">Recent Posts</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2023/07/16/ua-tat-hing-piat-e-li-kai/">一個外行對依值型別的理解</a>
+      </li>
+    
+      <li>
+        <a href="/2023/07/11/ko&#39;jin-wiki-2023-Q2/">個人wiki最近更新（2023年4-6月）</a>
+      </li>
+    
+      <li>
+        <a href="/2023/04/24/mng5khau2tiann5-sua2tsam7/">門口埕記事2：二代機初步完成啟用</a>
+      </li>
+    
+      <li>
+        <a href="/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/">個人wiki最近更新（2023年1-3月）</a>
+      </li>
+    
+      <li>
+        <a href="/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/">門口埕記事1：用樹莓派 3 運作 Pleroma 要三思</a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+<div class="widget tagcloud">
+  <h3 class="title">Tag Cloud</h3>
+  <div class="entry">
+    <a href="/tags/ActivityPub/" style="font-size: 11.54px;">ActivityPub</a> <a href="/tags/Clochur/" style="font-size: 10px;">Clochur</a> <a href="/tags/Django/" style="font-size: 10.77px;">Django</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/Esperanto/" style="font-size: 10.77px;">Esperanto</a> <a href="/tags/Fediverse/" style="font-size: 10.77px;">Fediverse</a> <a href="/tags/Gaeilge/" style="font-size: 10.77px;">Gaeilge</a> <a href="/tags/GooglePhoto/" style="font-size: 10px;">GooglePhoto</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Holo%E8%A9%B1/" style="font-size: 19.23px;">Holo話</a> <a href="/tags/LLVM/" style="font-size: 10.77px;">LLVM</a> <a href="/tags/Linux/" style="font-size: 10.77px;">Linux</a> <a href="/tags/Pleroma/" style="font-size: 10.77px;">Pleroma</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.31px;">Python</a> <a href="/tags/R-18/" style="font-size: 11.54px;">R-18</a> <a href="/tags/Racket/" style="font-size: 10px;">Racket</a> <a href="/tags/Rust/" style="font-size: 10.77px;">Rust</a> <a href="/tags/SILE/" style="font-size: 10.77px;">SILE</a> <a href="/tags/Scheme/" style="font-size: 13.08px;">Scheme</a> <a href="/tags/Shell-script/" style="font-size: 10px;">Shell script</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/tags/Wiki/" style="font-size: 10.77px;">Wiki</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/%E4%BA%8C%E3%80%87%E5%9B%9B%E4%BA%94/" style="font-size: 16.15px;">二〇四五</a> <a href="/tags/%E4%BF%A1%E4%BB%B0/" style="font-size: 10px;">信仰</a> <a href="/tags/%E5%85%AC%E8%B7%AF/" style="font-size: 13.08px;">公路</a> <a href="/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/" style="font-size: 16.92px;">分行散文或詩</a> <a href="/tags/%E5%8F%B0%EF%BC%8E%E4%B8%AD%E6%95%85%E4%BA%8B/" style="font-size: 13.08px;">台．中故事</a> <a href="/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/" style="font-size: 10px;">型別理論</a> <a href="/tags/%E5%AD%97%E5%9E%8B/" style="font-size: 10px;">字型</a> <a href="/tags/%E5%AE%A2%E5%AE%B6/" style="font-size: 10px;">客家</a> <a href="/tags/%E5%AE%A2%E5%AE%B6%E8%A9%B1/" style="font-size: 10px;">客家話</a> <a href="/tags/%E5%B0%8F%E8%AA%AA/" style="font-size: 20px;">小說</a> <a href="/tags/%E5%B7%B4%E5%A3%AB/" style="font-size: 10.77px;">巴士</a> <a href="/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/" style="font-size: 13.85px;">愛爾蘭語</a> <a href="/tags/%E6%89%93%E5%AD%97%E6%A9%9F/" style="font-size: 10px;">打字機</a> <a href="/tags/%E6%90%AD%E4%B9%98%E7%B4%80%E5%AF%A6/" style="font-size: 10px;">搭乘紀實</a> <a href="/tags/%E6%95%B8%E5%AD%B8/" style="font-size: 10.77px;">數學</a> <a href="/tags/%E6%96%87%E5%85%B7/" style="font-size: 10px;">文具</a> <a href="/tags/%E6%9D%B1%E5%8E%9F%E8%AA%9E/" style="font-size: 10px;">東原語</a> <a href="/tags/%E6%AD%8C%E8%A9%9E/" style="font-size: 11.54px;">歌詞</a> <a href="/tags/%E6%B2%92%E6%9C%89SNS%E7%9A%84%E6%97%A5%E5%AD%90/" style="font-size: 16.92px;">沒有SNS的日子</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 14.62px;">生活</a> <a href="/tags/%E7%9B%B4%E8%AD%AF%E5%99%A8/" style="font-size: 10px;">直譯器</a> <a href="/tags/%E7%B6%AD%E5%9F%BA%E7%99%BE%E7%A7%91/" style="font-size: 10px;">維基百科</a> <a href="/tags/%E8%AB%96/" style="font-size: 17.69px;">論</a> <a href="/tags/%E8%B3%87%E8%A8%8A/" style="font-size: 18.46px;">資訊</a> <a href="/tags/%E8%B3%A3%E5%87%BA%E8%AA%9E%E8%A8%80e%E5%B0%91%E5%B9%B4%E4%BA%BA/" style="font-size: 13.85px;">賣出語言ê少年人</a> <a href="/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/" style="font-size: 10.77px;">門口埕記事</a> <a href="/tags/%E9%9A%A8%E7%AD%86/" style="font-size: 15.38px;">隨筆</a>
+  </div>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">相關連結</h3>
+<ul class="entry">
+<!--
+<li><strong><a target="_blank" rel="noopener" href="http://yoxemblog.wordpress.com">
+舊 blog、舊文章 (於 Wordpress.com)</a></strong></li>
+-->
+<li><a target="_blank" rel="noopener" href="http://plurk.com/yoxem">
+Plurk</a></li>
+<li><a target="_blank" rel="noopener" href="https://g0v.social/@yoxem">
+Mastodon (g0v.social)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.flickr.com/photos/yoxem/sets/">
+Flickr 相簿（舊）</a></li>
+<li><em><a href="http://yoxem.github.io/pages/index.html">
+其他 (Yoxem's Homepage)……</a></em></li>
+</ul>
+</div>
+
+
+  <div class="widget tag">
+<h3 class="title">最近迴響</h3>
+<ul class="entry"><script type="text/javascript" src="http://yoxem.disqus.com/recent_comments_widget.js?num_items=5&hide_mods=0&hide_avatars=0&avatar_size=32&excerpt_length=100"></script></div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2023 Yoxem Chen
+  <br/>除非特殊說明本文作者均為 Yoxem Chen，其所作除非特殊指定外，均使用 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/2.5/tw/deed.zh_TW">CC BY-NC-SA 2.5 台灣授權</a>。<br/>
+
+Except being noticed, the articles is written by Yoxem Chen and licensed under <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/2.5/tw/deed.en">CC BY-NC-SA 2.5 Taiwan Version</a>.<br/>
+
+Powered by <a target="_blank" rel="noopener" href="http://hexo.io/index.html">Hexo</a>.
+</div>
+<div class="clearfix"></div>
+</footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'yoxem';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
