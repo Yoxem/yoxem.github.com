@@ -97,6 +97,203 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2023-07-23T14:24:14.000Z"><a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/">2023-07-23</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/">LaTeX斷行演算法</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        
+      <p>以下內容係參考網路上找到的LaTeX斷行演算法，加上一些修改而成。</p>
+<p>使用程式筆記本的.ipynb檔撰寫，語言是OCaml，授權為MIT License。載點：</p>
+<ul>
+<li><a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/linebreak.ipynb" title="[ipynb 檔]">[ipynb 檔]</a></li>
+<li><a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/linebreak.pdf" title="[PDF 檔]">[PDF 檔]</a></li>
+</ul>
+<p>以下是程式筆記本檔內文：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*有關於LaTeX使用於斷行的演算法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">首先我們要制定一個字元（包含斷行後新生的連字號，以及空白）在斷行前、斷行後的寬度</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*)</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*假設這段字元 word segment list = wordSegList，SP表達半形空白，HY表達連字號*)</span></span><br><span class="line"><span class="keyword">let</span> wordSegList = [<span class="string">&quot;no&quot;</span>; <span class="string">&quot;HY&quot;</span>; <span class="string">&quot;thing&quot;</span>; <span class="string">&quot;SP&quot;</span>; <span class="string">&quot;can&quot;</span>; <span class="string">&quot;SP&quot;</span>; <span class="string">&quot;stop&quot;</span>;<span class="string">&quot;SP&quot;</span>; <span class="string">&quot;the&quot;</span>; <span class="string">&quot;SP&quot;</span>; <span class="string">&quot;cro&quot;</span>; <span class="string">&quot;HY&quot;</span>; <span class="string">&quot;co&quot;</span>;<span class="string">&quot;HY&quot;</span> ;<span class="string">&quot;dile&quot;</span>; <span class="string">&quot;cross&quot;</span>; <span class="string">&quot;SP&quot;</span>; <span class="string">&quot;it.&quot;</span>] ;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val wordSegList : string list =
+  [&quot;no&quot;; &quot;HY&quot;; &quot;thing&quot;; &quot;SP&quot;; &quot;can&quot;; &quot;SP&quot;; &quot;stop&quot;; &quot;SP&quot;; &quot;the&quot;; &quot;SP&quot;; &quot;cro&quot;;
+   &quot;HY&quot;; &quot;co&quot;; &quot;HY&quot;; &quot;dile&quot;; &quot;cross&quot;; &quot;SP&quot;; &quot;it.&quot;]
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*現在轉成每個word segment都附帶長度的格式*)</span></span><br><span class="line"><span class="comment">(* sg: 文段 segment</span></span><br><span class="line"><span class="comment">ow : original width 原來的寬度 </span></span><br><span class="line"><span class="comment">hw : hyphenated width 該處指定為斷字後的寬度*)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> segment_with_length = &#123; sg: <span class="built_in">string</span>; ow: <span class="built_in">float</span>; hw: <span class="built_in">float</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>type segment_with_length = &#123; sg : string; ow : float; hw : float; &#125;
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(* 每個segment之長度*)</span></span><br><span class="line"><span class="keyword">let</span> segOwList = <span class="type">List</span>.map (<span class="keyword">fun</span> x -&gt; <span class="keyword">match</span> x <span class="keyword">with</span></span><br><span class="line">                            | <span class="string">&quot;SP&quot;</span> -&gt; <span class="number">1.0</span>  <span class="comment">(*SP 通常寬度為1*)</span></span><br><span class="line">                            | <span class="string">&quot;HY&quot;</span> -&gt; <span class="number">0.0</span> <span class="comment">(*HY 連字點寬度為0*)</span></span><br><span class="line">                            | _ -&gt; float_of_int (<span class="type">String</span>.length x))    <span class="comment">(*以chars的長度來當做文字寬度 假設是等寬半形字元*)</span></span><br><span class="line">                                      wordSegList</span><br><span class="line">                                    </span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val segOwList : float list =
+  [2.; 0.; 5.; 1.; 3.; 1.; 4.; 1.; 3.; 1.; 3.; 0.; 2.; 0.; 4.; 5.; 1.; 3.]
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*每個segment在其被斷行時的長度 *)</span></span><br><span class="line"><span class="keyword">let</span> segHwList = <span class="type">List</span>.map (<span class="keyword">fun</span> x -&gt; <span class="keyword">match</span> x <span class="keyword">with</span></span><br><span class="line">                            | <span class="string">&quot;SP&quot;</span> -&gt; <span class="number">0.0</span>  <span class="comment">(*SP 通常斷行後寬度為0*)</span></span><br><span class="line">                            | <span class="string">&quot;HY&quot;</span> -&gt; <span class="number">1.0</span> <span class="comment">(*HY 連字點斷行後為1*)</span></span><br><span class="line">                            | _ -&gt; infinity)<span class="comment">(*不可能斷行的地方，寬度設做0*)</span></span><br><span class="line">                                      wordSegList</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val segHwList : float list =
+  [infinity; 1.; infinity; 0.; infinity; 0.; infinity; 0.; infinity; 0.;
+   infinity; 1.; infinity; 1.; infinity; infinity; 0.; infinity]
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*3個列表組合 zip 在一起*)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> segListCombined = <span class="type">List</span>.combine (<span class="type">List</span>.combine wordSegList segOwList) segHwList;;</span><br><span class="line"></span><br><span class="line"><span class="comment">(*然後變成type segment_with_length的列表*)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> segWithLengthList = <span class="type">List</span>.map (<span class="keyword">fun</span> i -&gt; <span class="keyword">match</span> i <span class="keyword">with</span></span><br><span class="line">                                  | ((sg,ow),hw) -&gt; &#123;sg = sg; ow = ow; hw = hw&#125;) segListCombined</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val segListCombined : ((string * float) * float) list =
+  [((&quot;no&quot;, 2.), infinity); ((&quot;HY&quot;, 0.), 1.); ((&quot;thing&quot;, 5.), infinity);
+   ((&quot;SP&quot;, 1.), 0.); ((&quot;can&quot;, 3.), infinity); ((&quot;SP&quot;, 1.), 0.);
+   ((&quot;stop&quot;, 4.), infinity); ((&quot;SP&quot;, 1.), 0.); ((&quot;the&quot;, 3.), infinity);
+   ((&quot;SP&quot;, 1.), 0.); ((&quot;cro&quot;, 3.), infinity); ((&quot;HY&quot;, 0.), 1.);
+   ((&quot;co&quot;, 2.), infinity); ((&quot;HY&quot;, 0.), 1.); ((&quot;dile&quot;, 4.), infinity);
+   ((&quot;cross&quot;, 5.), infinity); ((&quot;SP&quot;, 1.), 0.); ((&quot;it.&quot;, 3.), infinity)]
+
+
+
+val segWithLengthList : segment_with_length list =
+  [&#123;sg = &quot;no&quot;; ow = 2.; hw = infinity&#125;; &#123;sg = &quot;HY&quot;; ow = 0.; hw = 1.&#125;;
+   &#123;sg = &quot;thing&quot;; ow = 5.; hw = infinity&#125;; &#123;sg = &quot;SP&quot;; ow = 1.; hw = 0.&#125;;
+   &#123;sg = &quot;can&quot;; ow = 3.; hw = infinity&#125;; &#123;sg = &quot;SP&quot;; ow = 1.; hw = 0.&#125;;
+   &#123;sg = &quot;stop&quot;; ow = 4.; hw = infinity&#125;; &#123;sg = &quot;SP&quot;; ow = 1.; hw = 0.&#125;;
+   &#123;sg = &quot;the&quot;; ow = 3.; hw = infinity&#125;; &#123;sg = &quot;SP&quot;; ow = 1.; hw = 0.&#125;;
+   &#123;sg = &quot;cro&quot;; ow = 3.; hw = infinity&#125;; &#123;sg = &quot;HY&quot;; ow = 0.; hw = 1.&#125;;
+   &#123;sg = &quot;co&quot;; ow = 2.; hw = infinity&#125;; &#123;sg = &quot;HY&quot;; ow = 0.; hw = 1.&#125;;
+   &#123;sg = &quot;dile&quot;; ow = 4.; hw = infinity&#125;;
+   &#123;sg = &quot;cross&quot;; ow = 5.; hw = infinity&#125;; &#123;sg = &quot;SP&quot;; ow = 1.; hw = 0.&#125;;
+   &#123;sg = &quot;it.&quot;; ow = 3.; hw = infinity&#125;]
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*</span></span><br><span class="line"><span class="comment">我們可以定義在第 n 處斷行=&gt;除了斷行點以外的文字消失，的成本函數 cost(n)，成本函數越小越好。</span></span><br><span class="line"><span class="comment">這時後需要用動態規劃解決。</span></span><br><span class="line"><span class="comment">badness (k, n)是指k~n-1處若塞於一行，且n處斷行時的懲罰函數（等下介紹），越小越好</span></span><br><span class="line"><span class="comment">cost(n) = baness(0,n) 若其為有限，否則 min of k in 0...n-1 of badness(k, n) + cost(k)</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">懲罰函數badness定義是：若lineWidth &gt;= widthBetween(a,b)，則為二者之差的三次方，否則是無限大。</span></span><br><span class="line"><span class="comment">k &gt;= n</span></span><br><span class="line"><span class="comment">badness(k, n) =  (lineWidth - widthBetween(k, n) )^3 if lineWidth &gt;= widthBetween(k+1, n)</span></span><br><span class="line"><span class="comment">                infinity                              elsewhere</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">widthBetween(a,b)係指 a到b 塞在一行時的寬度</span></span><br><span class="line"><span class="comment">widthBetween(a,b) = hw[b] + (sum&#123;i=a...b-1&#125; of ow[i]</span></span><br><span class="line"><span class="comment">*)</span></span><br><span class="line"><span class="keyword">open</span> <span class="type">Printf</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> lineWidth = <span class="number">12.0</span>;; <span class="comment">(*一行最大寬度*)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> widthBetween a b = <span class="keyword">if</span> a&gt; b <span class="keyword">then</span> raise (<span class="type">Failure</span> <span class="string">&quot;Exception: widthBetween a b, a &lt;=b &quot;</span>)</span><br><span class="line">    <span class="keyword">else</span> (<span class="type">List</span>.nth segWithLengthList b).hw +. (sumOfOw a (b-<span class="number">1</span>) segWithLengthList);;</span><br><span class="line"><span class="keyword">let</span> badness k n = <span class="keyword">let</span> remainedSpaceWidth = lineWidth -. (widthBetween k n) <span class="keyword">in</span></span><br><span class="line">                      <span class="keyword">if</span> remainedSpaceWidth &gt;= <span class="number">0.</span> <span class="keyword">then</span></span><br><span class="line">                          remainedSpaceWidth ** <span class="number">3.</span></span><br><span class="line">                          <span class="keyword">else</span> infinity;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> minIndex = <span class="built_in">ref</span> <span class="number">0</span>;; <span class="comment">(*cost(x)發生的最小的k)值*)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">(*動態規劃存放 (min cost, 其中的 k 滿足 min cost) 之處*)</span></span><br><span class="line"><span class="comment">(*格式： n (minValue, minIndex) *)</span></span><br><span class="line"><span class="keyword">let</span> costKStorage = <span class="type">Hashtbl</span>.create <span class="number">10</span>;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">rec</span> cost n =</span><br><span class="line">    <span class="keyword">if</span> <span class="type">Hashtbl</span>.mem costKStorage n <span class="keyword">then</span> <span class="comment">(*若是已經存儲了，即用裡面的值，避免重複運算*)</span></span><br><span class="line">        <span class="keyword">let</span> (minValue, minIndex) = <span class="type">Hashtbl</span>.find costKStorage n <span class="keyword">in</span></span><br><span class="line">        minValue</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (badness <span class="number">0</span> n) &lt; infinity <span class="keyword">then</span> (badness <span class="number">0</span> n)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">let</span> compareList = <span class="type">List</span>.init n (<span class="keyword">fun</span> k -&gt; (badness k n) +. cost k) <span class="keyword">in</span></span><br><span class="line">        <span class="comment">(*找最小值*)</span></span><br><span class="line">        <span class="keyword">let</span> findMin lst = <span class="type">List</span>.fold_left min infinity lst <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">let</span> minValue = findMin compareList <span class="keyword">in</span> <span class="comment">(*最小值*)</span></span><br><span class="line">        <span class="comment">(*找最小值所在的索引index值*)</span></span><br><span class="line">        <span class="keyword">let</span> findMinIndex lst = <span class="type">List</span>.fold_left</span><br><span class="line">                                    (<span class="keyword">fun</span> pos i -&gt; <span class="keyword">if</span> (<span class="type">List</span>.nth lst i) == minValue <span class="keyword">then</span> i <span class="keyword">else</span> pos)</span><br><span class="line">                                    (-<span class="number">1</span>)</span><br><span class="line">                                    (<span class="type">List</span>.init (<span class="type">List</span>.length lst) (<span class="keyword">fun</span> x -&gt; x)) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">let</span> minIndex = findMinIndex compareList <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">let</span> _ =  <span class="type">Hashtbl</span>.add costKStorage n (minValue, minIndex) <span class="keyword">in</span></span><br><span class="line">        minValue;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val lineWidth : float = 12.
+
+
+
+val widthBetween : int -&gt; int -&gt; float = &lt;fun&gt;
+
+
+
+val badness : int -&gt; int -&gt; float = &lt;fun&gt;
+
+
+
+val minIndex : int ref = &#123;contents = 0&#125;
+
+
+
+val costKStorage : (&#39;_weak11, &#39;_weak12) Hashtbl.t = &lt;abstr&gt;
+
+
+
+val cost : int -&gt; float = &lt;fun&gt;
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*sumOfOw : 上文的(sum&#123;i=a...b&#125; of ow[i]*)</span></span><br><span class="line"><span class="comment">(* sumOfOwAux：輔助函數*)</span></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">rec</span> sumOfOwAux i start final sum <span class="built_in">list</span> =</span><br><span class="line"><span class="keyword">if</span> i &lt; start <span class="keyword">then</span> sumOfOwAux (i+<span class="number">1</span>) start final sum <span class="built_in">list</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (i&gt;= start &amp;&amp; i &lt;= final) <span class="keyword">then</span> sumOfOwAux (i+<span class="number">1</span>) start final (sum +. (<span class="type">List</span>.nth <span class="built_in">list</span> i).ow) <span class="built_in">list</span></span><br><span class="line"><span class="keyword">else</span> sum ;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sumOfOw start final <span class="built_in">list</span> = sumOfOwAux <span class="number">0</span> start final <span class="number">0.0</span> <span class="built_in">list</span>;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val sumOfOwAux :
+  int -&gt; int -&gt; int -&gt; float -&gt; segment_with_length list -&gt; float = &lt;fun&gt;
+
+
+
+val sumOfOw : int -&gt; int -&gt; segment_with_length list -&gt; float = &lt;fun&gt;
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*算到第11之處的成本*)</span></span><br><span class="line"><span class="comment">(*結果</span></span><br><span class="line"><span class="comment">no thing</span></span><br><span class="line"><span class="comment">can stop</span></span><br><span class="line"><span class="comment">crocodile</span></span><br><span class="line"><span class="comment">...........^</span></span><br><span class="line"><span class="comment">最多只能塞到箭頭處*)</span></span><br><span class="line">cost <span class="number">11</span>;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>- : float = 179.
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*找 costKStorage 目前的值*)</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">ref</span> <span class="string">&quot;&quot;</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">let</span> _ = (<span class="type">Hashtbl</span>.iter (<span class="keyword">fun</span> x y -&gt; <span class="keyword">let</span> (y1,y2) = y <span class="keyword">in</span> a := !a ^ (sprintf <span class="string">&quot;%d : %f %d\n&quot;</span> x y1 y2))  costKStorage) <span class="keyword">in</span> !a;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>- : string =
+&quot;6 : inf -1\n2 : inf -1\n8 : inf -1\n7 : 152.000000 3\n13 : 153.000000 7\n12 : inf -1\n4 : inf -1\n9 : 28.000000 5\n11 : 179.000000 7\n0 : inf -1\n10 : inf -1\n&quot;
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">(*找出每個斷行點，回溯的搜尋HashTable*)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="keyword">rec</span> findBreakPointAux res k =</span><br><span class="line"><span class="keyword">if</span> <span class="type">Hashtbl</span>.mem costKStorage k <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">let</span> (minValue, minIndex) = <span class="type">Hashtbl</span>.find costKStorage k <span class="keyword">in</span></span><br><span class="line">    findBreakPointAux (<span class="type">List</span>.append res [k]) minIndex</span><br><span class="line">  <span class="keyword">else</span> (<span class="type">List</span>.append res [k]);;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">let</span> findBreakPoint n = findBreakPointAux <span class="literal">[]</span> n;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>val findBreakPointAux : int list -&gt; int -&gt; int list = &lt;fun&gt;
+
+
+
+val findBreakPoint : int -&gt; int list = &lt;fun&gt;
+</code></pre>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">findBreakPoint <span class="number">13</span>;;</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>findBreakPoint &lt;-- 13
+findBreakPointAux &lt;-- []
+findBreakPointAux --&gt; &lt;fun&gt;
+findBreakPointAux* &lt;-- 13
+Hashtbl.find &lt;-- &lt;abstr&gt;
+Hashtbl.find --&gt; &lt;fun&gt;
+Hashtbl.find* &lt;-- &lt;poly&gt;
+Hashtbl.find* --&gt; &lt;poly&gt;
+findBreakPointAux &lt;-- [13]
+findBreakPointAux --&gt; &lt;fun&gt;
+findBreakPointAux* &lt;-- 7
+Hashtbl.find &lt;-- &lt;abstr&gt;
+Hashtbl.find --&gt; &lt;fun&gt;
+Hashtbl.find* &lt;-- &lt;poly&gt;
+Hashtbl.find* --&gt; &lt;poly&gt;
+findBreakPointAux &lt;-- [13; 7]
+findBreakPointAux --&gt; &lt;fun&gt;
+findBreakPointAux* &lt;-- 3
+findBreakPointAux* --&gt; [13; 7; 3]
+findBreakPointAux* --&gt; [13; 7; 3]
+findBreakPointAux* --&gt; [13; 7; 3]
+findBreakPoint --&gt; [13; 7; 3]
+- : int list = [13; 7; 3]
+</code></pre>
+<script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  <!-- hexo-list-related-posts -->
+
+        
+<div style="margin-top: 0em; ">    
+ <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2021/01/10/irish-conjugator/">愛爾蘭語的動詞變化產生器 demo</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/01/20/schemee5callcce5iong7huatki2le7-2/">Scheme ê call/cc ê 用法舉例(2)——coroutine</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/10/12/tua7soo3ji7tu5huat4ian2sng3huat4/">大數字除法演算法——Newton 法 ê 變形</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/">門口埕記事1：用樹莓派 3 運作 Pleroma 要三思</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/11/22/activitypub-e-tshiok-thoo'muai-e-sim'tit/">ActivityPub 協定的基本踩坑心得（下）</a></li></ul>    </div>
+        
+         
+
+  </div>
+
+</article>
+
+
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2023-07-16T15:03:52.000Z"><a href="/2023/07/16/ua-tat-hing-piat-e-li-kai/">2023-07-16</a></time>
       
       
@@ -125,7 +322,7 @@
 
         
 <div style="margin-top: 0em; ">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2018/01/24/syntax-rules-kap4-define-syntax-e5le7/">[Note][Scheme] define-syntax 佮 syntax-rules 的使用例</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/11/22/activitypub-e-tshiok-thoo'muai-e-sim'tit/">ActivityPub 協定的基本踩坑心得（下）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2014/05/20/rubyjs---讓-hexo-更方便輸入旁註標記/">ruby.js - 讓 Hexo 更方便輸入旁註標記 <ruby></a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/10/12/tua7soo3ji7tu5huat4ian2sng3huat4/">大數字除法演算法——Newton 法 ê 變形</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2018/01/05/Holopediae5POJkau3han3ji7e5pian3uann7/">淺論白話字（台羅）到漢字翻譯系統的建構與問題</a></li></ul>    </div>
+ <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2021/07/10/hoo7-Rust-iong7-Cairo-kap4-Harfbuzz-ti7-Windows10/">於 Windows 10 讓 Rust 專案使用 Cairo 和 Harfbuzz函式庫</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/10/02/gi2gian5tik8sing3/">語言特性</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2011/07/19/解決-cx_freeze-做出的-exe-檔無法在中文路徑下執行的錯誤/">解決 cx_Freeze 做出的 .exe 檔無法在中文路徑下執行的問題</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/02/14/ti-linux-tsiong-pdf-tshai-sek-tsuan-tso-oo-peh/">在 Linux 將 PDF 彩色轉成黑白</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/11/22/activitypub-e-tshiok-thoo'muai-e-sim'tit/">ActivityPub 協定的基本踩坑心得（下）</a></li></ul>    </div>
         
          
 
@@ -645,104 +842,6 @@
 
 
   
-    <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2022-07-25T14:07:26.000Z"><a href="/2022/07/25/sinsim-kiankhong-vs-bangsiong/">2022-07-25</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2022/07/25/sinsim-kiankhong-vs-bangsiong/">身心健康和夢想誰輕誰重</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        
-      <pre><code> 1  身心健康平安和不一定達成的夢想相比是更重要的。
-     1.1  身心健康是每天的事，夢想是未來的事
-         1.1.1  人每天都要生活，而生活品質和生理心靈相關
-         1.1.2  體力的健康影響意志力和專注力的強韌性。
-             1.1.2.1  專注力不好，心靈的能力會上升
-             1.1.2.2  生活需要面對風浪，風浪需要強韌的心靈
-     1.2  夢想不一定會追得到，但需要花很多心力
-         1.2.1  所謂的夢想，這裏指自己的追求
-         1.2.2  追求是不一定達成的，要達成往往需要付出代價
-             1.2.2.1  包含以下興趣嗜好：
-                 1.2.2.1.1  寫一個軟體專案
-                 1.2.2.1.2  寫小說
-                 1.2.2.1.3  學外語
-                 1.2.2.1.4  甚至創業、副業、寫音樂、練運動技能
-             1.2.2.2  這些都需要耗費腦力和體力
-     1.3  人的能力是有限的
-         1.3.1  英才俊傑一天擁有的時間也不比同時代的人多
-         1.3.2  體力和腦力會隨時間衰退
-         1.3.3  體力和腦力需要休養
-         1.3.4  如果過度操勞會傷害人力
-     1.4  夢想有時候只是一時的妄想
-         1.4.1  不代表所有夢想都是妄想
-         1.4.2  但也可能是一時衝動
-             1.4.2.1  如果知道是一時衝動前栽入太多，會無謂耗費精力
-             1.4.2.2  知道是一時衝動的話，那無疑是投注沉沒成本
-                 1.4.2.2.1  人心常常對沉沒的成本執着
-     1.5  身心不健康會影響長遠的一生
-         1.5.1  人會老，身心不健康很可能會讓人生不如死
-             1.5.1.1  現在公衛水準會讓人活很久
-             1.5.1.2  但如果自己早衰，早面對疾病，會讓人很痛苦
-             1.5.1.3  加上現實四面而來的壓力可能讓人陷入無盡深淵
-                 1.5.1.3.1  身心不健康可能讓人陷入成癮、神經衰弱等等
-                 1.5.1.3.2  上述不良狀況會讓人身心更不健康，人生更受挫折
-                 1.5.1.3.3  從而陷入惡性循環
-         1.5.2  許多慢性疾病和積勞成疾有關
-             1.5.2.1  除了上述的成癮和神經衰弱問題，還有身體疾病
-             1.5.2.2  慢性疾病和年老失能有關
-             1.5.2.3  如果自己的身心獲得足夠的充電和保養，那陷入疾病會比較低
-     1.6  注意自己的身體心靈
-         1.6.1  自己的夢想也是給心靈的滿足
-         1.6.2  但是自我實現的根基是身心
-         1.6.3  這三個很重要：吃得下飯、睡得下去、笑得出來
-</code></pre>
-<script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  <!-- hexo-list-related-posts -->
-
-        
-<div style="margin-top: 0em; ">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2017/03/20/Su1huai5/">抒懷</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/06/10/SerenityOS/">Serenity OS</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2015/03/10/旅前短辯/">旅前之辯</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2015/07/06/MonPays/">酷寒卻溫暖的 Mon Pays</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2010/06/23/談自力解決之兩三/">談自力解決之兩三</a></li></ul>    </div>
-        
-         
-
-  </div>
-
-</article>
-
-
-
-
-  
 
   <nav id="pagination">
   
@@ -773,7 +872,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/Blog/">Blog</a><small>140</small></li>
+    <li><a href="/categories/Blog/">Blog</a><small>141</small></li>
   
     <li><a href="/categories/上代blog的文章/">上代blog的文章</a><small>5</small></li>
   
@@ -789,6 +888,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/">LaTeX斷行演算法</a>
+      </li>
+    
+      <li>
         <a href="/2023/07/16/ua-tat-hing-piat-e-li-kai/">一個外行對依值型別的理解</a>
       </li>
     
@@ -802,10 +905,6 @@
     
       <li>
         <a href="/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/">個人wiki最近更新（2023年1-3月）</a>
-      </li>
-    
-      <li>
-        <a href="/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/">門口埕記事1：用樹莓派 3 運作 Pleroma 要三思</a>
       </li>
     
   </ul>
