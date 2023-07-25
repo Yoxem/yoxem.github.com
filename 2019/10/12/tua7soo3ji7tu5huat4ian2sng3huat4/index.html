@@ -6,7 +6,7 @@
   <title>大數字除法演算法——Newton 法 ê 變形 | 北郊獨語 - Yoxem&#39;s Blog</title>
   <meta name="author" content="Yoxem Chen">
   
-  <meta name="description" content="（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）
+  <meta name="description" content="（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）
 說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&amp;gt;&amp;gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？">
   
   
@@ -26,15 +26,15 @@
       "@type": "BlogPosting",
       "headline": "大數字除法演算法——Newton 法 ê 變形",
        "datePublished": "2019-10-12T00:00:00+08:00",
-       "dateModified" : "2023-06-13T10:14:58+08:00",
+       "dateModified" : "2023-07-26T02:15:55+08:00",
       "author": [{
           "@type": "Person",
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
        "keywords" :    ["資訊","Holo話","數學"] ,
-      "abstract" : "（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？",
-      "text" : "（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？\n一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \\in Z , Z &#x3D;  { x \\mid x \\in 𝑵 \\bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。\n咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \\approx N &#x2F; D$ ，mā 近倚商數矣。\n但是有一个問題：$D^{-1}$是小數，欲按怎算 leh？\n一个方法著是 kā $\\frac{1}{D}$ 乘以 $a^p$（就是放大），算出 $\\frac{a^p}{D}$ ê 近似數 $y_k$，按呢 $Ny_k \\approx \\frac{Na^p}{D}$。koh 設定 $ x 向正爿徙 p 位 :&#x3D; x_a \\gg p &#x3D; x &#x2F;&#x2F; a^p$；其中$a &#x2F;&#x2F; b &#x3D; a 除以 b~ê 商數$），就通得著 $Ny_k \\gg p \\approx \\frac{Na^p}{D} &#x2F;&#x2F; a^p \\approx N&#x2F;D$。\n$p$ ê size[sài-suh] 著偌大？我認為參考這篇文章 (pdf)，會 tàng 要求 $\\frac{N}{D} - Nx \\leq 1$，\n而且因為 $N &lt; a^{length(N)}$，tī $N\\neq 0$ ê 時，tiō 有\n$$\\frac{1}{D} - x &lt; a^{-length{N}}$$\n咱欲予 $\\frac{a^p}{D} - xa^p $ tī $\\frac{1}{D} \\neq x$ ê 時，會當用整數加減計算，所以通 kā 設定做 $\\frac{a^p}{D} - xa^p &#x3D; a^p(\\frac{1}{D}-x) &lt; a^1$，按呢比較一下， $a^p &#x3D; a^{1+length(N)}$。所以 $p$ 通設定做 $1+length(N）$。\nBeh 揣 $y_k \\approx \\frac{a^p}{D}$，通用 $f(y) &#x3D; \\frac{1}{y} - \\frac{D}{a^p}（其中 p &#x3D; 1+length(N)）$ kap Newton 法計算伊 ê 近似解。\ntiō有\n$y_{k+1} &#x3D; y_k - \\frac{f(y)}{f’(y)} &#x3D; y_k - \\frac{\\frac{1}{y_k} - \\frac{D}{a^p}}{-y_k^{-2}} &#x3D; 2y_k - \\frac{y_k^2D}{a^p}$。\n（拄開始通設定 $y_0&#x3D;1$）\n會當 kā $\\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：\n$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$\n範例設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。\n$$\\begin{align*}&amp; y_0 &#x3D; 1 \\\n&amp; y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 \\\n&amp; y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 \\\n&amp; 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, \\\n&amp; y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189\n\\end{align*}$$\n因為 $y_15 &#x3D; y_16 &#x3D; 2189$，計算結束。所以\n$$Ny_16 &#x3D; 188177385, N&#x2F;&#x2F;D \\approx Ny_16&#x2F;&#x2F;a^{length(N)} &#x3D; 188。$$\n比較 $N&#x2F;D \\approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。\n毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。\n "
+      "abstract" : "（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？",
+      "text" : "（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？\n一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \\in Z , Z &#x3D;  { x \\mid x \\in 𝑵 \\bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。\n咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \\approx N &#x2F; D$ ，mā 近倚商數矣。\n但是有一个問題：$D^{-1}$是小數，欲按怎算 leh？\n一个方法著是 kā $\\frac{1}{D}$ 乘以 $a^p$（就是放大），算出 $\\frac{a^p}{D}$ ê 近似數 $y_k$，按呢 $Ny_k \\approx \\frac{Na^p}{D}$。koh 設定 $ x 向正爿徙 p 位 :&#x3D; x_a \\gg p &#x3D; x &#x2F;&#x2F; a^p$；其中$a &#x2F;&#x2F; b &#x3D; a 除以 b~ê 商數$），就通得著 $Ny_k \\gg p \\approx \\frac{Na^p}{D} &#x2F;&#x2F; a^p \\approx N&#x2F;D$。\n$p$ ê size[sài-suh] 著偌大？我認為參考這篇文章 (pdf)，會 tàng 要求 $\\frac{N}{D} - Nx \\leq 1$，\n而且因為 $N &lt; a^{length(N)}$，tī $N\\neq 0$ ê 時，tiō 有\n$$\\frac{1}{D} - x &lt; a^{-length{N}}$$\n咱欲予 $\\frac{a^p}{D} - xa^p $ tī $\\frac{1}{D} \\neq x$ ê 時，會當用整數加減計算，所以通 kā 設定做 $\\frac{a^p}{D} - xa^p &#x3D; a^p(\\frac{1}{D}-x) &lt; a^1$，按呢比較一下， $a^p &#x3D; a^{1+length(N)}$。所以 $p$ 通設定做 $1+length(N）$。\nBeh 揣 $y_k \\approx \\frac{a^p}{D}$，通用 $f(y) &#x3D; \\frac{1}{y} - \\frac{D}{a^p}（其中 p &#x3D; 1+length(N)）$ kap Newton 法計算伊 ê 近似解。\ntiō有\n$y_{k+1} &#x3D; y_k - \\frac{f(y)}{f’(y)} &#x3D; y_k - \\frac{\\frac{1}{y_k} - \\frac{D}{a^p}}{-y_k^{-2}} &#x3D; 2y_k - \\frac{y_k^2D}{a^p}$。\n（拄開始通設定 $y_0&#x3D;1$）\n會當 kā $\\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：\n$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$\n範例設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。\n$ y_0 &#x3D; 1 $\n$ y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 $\n$ y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 $\n$ 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, $\n$ y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189$\n因為 $y_{15} &#x3D; y_{16} &#x3D; 2189$，計算結束。所以\n$Ny_{16} &#x3D; 188177385, N&#x2F;&#x2F;D \\approx Ny_{16}&#x2F;&#x2F;a^{1+length(N)} &#x3D; 188。$\n比較 $N&#x2F;D \\approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。\n毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。\n "
     }
     </script>
 
@@ -110,7 +110,7 @@
           <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AA%AA%E6%98%8E"><span class="toc-text">說明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AF%84%E4%BE%8B"><span class="toc-text">範例</span></a></li></ol>
           </div>
         
-      <p><strong>（開始寫 tī 2019-10-11，上新修改 tī 2019-10-16）</strong></p>
+      <p><strong>（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）</strong></p>
 <h2 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h2><p>設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？<span id="more"></span></p>
 <p>一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \in Z , Z &#x3D;  { x \mid x \in 𝑵 \bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。</p>
 <p>咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \approx N &#x2F; D$ ，mā 近倚商數矣。</p>
@@ -127,14 +127,13 @@
 <p>會當 kā $\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：</p>
 <p>$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$</p>
 <h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p>設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。</p>
-<p>$$<br>\begin{align*}<br>&amp; y_0 &#x3D; 1 \</p>
-<p>&amp; y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 \</p>
-<p>&amp; y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 \</p>
-<p>&amp; 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, \</p>
-<p>&amp; y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189</p>
-<p>\end{align*}<br>$$</p>
-<p>因為 $y_15 &#x3D; y_16 &#x3D; 2189$，計算結束。所以</p>
-<p>$$Ny_16 &#x3D; 188177385, N&#x2F;&#x2F;D \approx Ny_16&#x2F;&#x2F;a^{length(N)} &#x3D; 188。$$</p>
+<p>$ y_0 &#x3D; 1 $</p>
+<p>$ y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 $</p>
+<p>$ y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 $</p>
+<p>$ 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, $</p>
+<p>$ y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189$</p>
+<p>因為 $y_{15} &#x3D; y_{16} &#x3D; 2189$，計算結束。所以</p>
+<p>$Ny_{16} &#x3D; 188177385, N&#x2F;&#x2F;D \approx Ny_{16}&#x2F;&#x2F;a^{1+length(N)} &#x3D; 188。$</p>
 <p>比較 $N&#x2F;D \approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。</p>
 <p>毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。</p>
 <script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
@@ -176,11 +175,6 @@
       
       <div class="clearfix"></div>
     </footer>
-  <!-- hexo-list-related-posts -->
-
-<div style="margin-top: 0px; border-top: 1px solid #ddd; padding-top: 26px">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2019/06/21/an1tsng1racketllvm/">安裝 Racket-llvm</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2018/07/29/schemee5pin5tuann7ke3sng3e5le7/">Scheme ê 延遲計算 (lazy evaluation) ê 例</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2019/01/20/schemee5callcce5iong7huatki2le7-2/">Scheme ê call/cc ê 用法舉例(2)——coroutine</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2018/01/24/syntax-rules-kap4-define-syntax-e5le7/">[Note][Scheme] define-syntax 佮 syntax-rules 的使用例</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2017/06/30/eng7tortsiunn7ptt/">用tor上ptt</a></li></ul>    </div>
-        
 
   </div>
 
@@ -329,5 +323,20 @@ var disqus_shortname = 'yoxem';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

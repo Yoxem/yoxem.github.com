@@ -148,11 +148,6 @@
       
       <div class="clearfix"></div>
     </footer>
-  <!-- hexo-list-related-posts -->
-
-<div style="margin-top: 0px; border-top: 1px solid #ddd; padding-top: 26px">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2017/05/04/juat8thinn1e5am3me5/">熱天的暗暝</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2017/03/28/gia5thau5kuann3thinn1/">夯頭看天，佇這片黃昏山坪</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2017/01/02/gua2kap4li2it4tit8kiann5/">我和汝一直走</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/07/29/khong'ia-nih-e-lu'kheh/">曠野ni̍h ê旅客</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2021/06/20/si7su1hu5si5/">是斯浮時 (Sī-su-hû-sî, Sisyphus)</a></li></ul>    </div>
-        
 
   </div>
 
@@ -301,5 +296,20 @@ var disqus_shortname = 'yoxem';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

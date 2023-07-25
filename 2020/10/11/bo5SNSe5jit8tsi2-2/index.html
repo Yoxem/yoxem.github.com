@@ -195,11 +195,6 @@
       
       <div class="clearfix"></div>
     </footer>
-  <!-- hexo-list-related-posts -->
-
-<div style="margin-top: 0px; border-top: 1px solid #ddd; padding-top: 26px">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2020/12/03/bo5SNSe5jit8tsi2-14/">沒有SNS的日子（十四）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/10/06/bo5SNSe5jit8tsi2-1/">沒有 SNS 的日子（一）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/12/03/bo5SNSe5jit8tsi2-10/">沒有SNS的日子（十）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/12/03/bo5SNSe5jit8tsi2-16/">沒有SNS的日子（十六）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2020/12/03/bo5SNSe5jit8tsi2-15/">沒有SNS的日子（十五）</a></li></ul>    </div>
-        
 
   </div>
 
@@ -348,5 +343,20 @@ var disqus_shortname = 'yoxem';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>

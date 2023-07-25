@@ -167,11 +167,6 @@
       
       <div class="clearfix"></div>
     </footer>
-  <!-- hexo-list-related-posts -->
-
-<div style="margin-top: 0px; border-top: 1px solid #ddd; padding-top: 26px">    
- <h3 class="related-posts-heading">關聯文章</h3><ul class="related-posts"><li class="related-posts-item"><a class="related-posts-link" href="/2014/11/09/[R-18]-隱晦密合辭華，在世界語－－淺談-Sekretaj-Sonetoj-第-35-篇的系列動詞（上）/">[R-18] 隱晦密合辭華，在世界語－－淺談 Sekretaj Sonetoj 第 35 篇的系列動詞（上）</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2015/03/10/旅前短辯/">旅前之辯</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2017/03/20/Su1huai5/">抒懷</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2016/02/15/koan1i5put4cheng5ai3--e5li2iu5/">無題</a></li><li class="related-posts-item"><a class="related-posts-link" href="/2022/07/25/sinsim-kiankhong-vs-bangsiong/">身心健康和夢想誰輕誰重</a></li></ul>    </div>
-        
 
   </div>
 
@@ -320,5 +315,20 @@ var disqus_shortname = 'yoxem';
 })(jQuery);
 </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
