@@ -32,7 +32,7 @@
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
-       "keywords" :    ["資訊","Holo話","SILE"] ,
+       "keywords" :    ["Holo話","資訊","SILE"] ,
       "abstract" : "（上尾更新佇：2018-03-05）\n介紹SILE (Simon’s Improved Layout Engine) 是一款佮 LaTeX 相𫝛的排版軟體。TeX {rb|engine|ia̋n-jín} 已經開發幾十年矣，就算後來有較濟的版本，嘛攏是佇伊的面頂抑是用別款語言改寫伊的。毋過開發真久，Tex 系的語言有一寡歷史致到的問題，嘛有各囝系統之間無相通的情況。",
       "text" : "（上尾更新佇：2018-03-05）\n介紹SILE (Simon’s Improved Layout Engine) 是一款佮 LaTeX 相𫝛的排版軟體。TeX engine[ia̋n-jín] 已經開發幾十年矣，就算後來有較濟的版本，嘛攏是佇伊的面頂抑是用別款語言改寫伊的。毋過開發真久，Tex 系的語言有一寡歷史致到的問題，嘛有各囝系統之間無相通的情況。\n\n\nSILE 是用 Lua 寫的新文字模式排版 engine。雖罔有參考 TeX 的演算法佮語法，但是嘛有學商業圖型排版軟體 InDesign 的特點，支援濟言語，嘛通用 Lua 擴大功能。嘛會當創作家己的文書枋模。其他通看 demo。\n安裝以下是佇 Linux Mint 18 安裝 SILE 0.9.8 的方法：\n\n到 download[tang-lóo] 頁 掠原始碼 tar.gz 的壓縮檔。\n拍開終端機，輸入指令安裝需要的套件（凡勢猶有其他的）：\n\n\nsudo apt install libharfbuzz-dev libfontconfig1-dev \\\nlua5.2 liblua5.2-dev lua-lpeg-dev lua-expat-dev \\\nlua-filesystem-dev\n\n\n因為壓縮檔愛的範例用 Gentium 的字型，建議安裝：\n\napt install fonts-sil-gentium\n\n\n入去囥壓縮檔的目錄（假使是 ~&#x2F;Download），共壓縮檔敨開，入內底：\n\n\ncd ~/Download\ntar xvf sile-0.9.4.tar.bz2\ncd sile-0.9.4\n\n\n\n編譯內底的物件：\n\n\n./configure # 加「--prefix=目錄所在」通指定安裝的位\nmake\nsudo make install\n\n\n測試因為 SILE 的排版副檔名毋是 .tex，是 .sil，咱愛創立一个 test.sil 文字檔，內容是：\n\n\n煞來佇終端機內底輸入指令編譯做 PDF：\nsile test\n\n輸出結果：\n註敨開壓縮檔內底的 examples 目錄有一寡測試，通做排版的例。\n "
     }
@@ -170,7 +170,7 @@ sudo make install
         
   
   <div class="tags">
-    <a href="/tags/資訊/">資訊</a>, <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/SILE/">SILE</a>
+    <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/資訊/">資訊</a>, <a href="/tags/SILE/">SILE</a>
   </div>
 
         

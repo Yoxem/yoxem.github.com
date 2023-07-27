@@ -42,7 +42,7 @@ sh
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
-       "keywords" :    ["Shell script","資訊","Holo話"] ,
+       "keywords" :    ["Holo話","Shell script","資訊"] ,
       "abstract" : "",
       "text" : "（上尾更新 tī：2019-11-11）\n實在 tsih-tsài 袂牢電腦無通知直接斷電 ê 情形，tshiau 過 ê 足 tsē 資料 mā 無法度解決。\n姑不而將，家己寫一个 shell script。\n\n\n必要 ê 套件：\n\nupower\nzenity\nsh\n\n將 hit 个 shell script khǹg 好，chmod u+x  system-autodetect-battery-and-hibernate.sh。\nKoh 用 crontab -e 指令，加每 x 分鐘執行這个程式 ê routine。以「每 3 分鐘執行囥佇 &#x2F;opt&#x2F; ê system-autodetect-battery-and-hibernate.sh」做例：\n\n0-59/3 * * * * export DISPLAY=:0 && /opt/system-autodetect-battery-and-hibernate.sh\n\n\n向望 tse 有效。\n "
     }
@@ -148,7 +148,7 @@ sh
         
   
   <div class="tags">
-    <a href="/tags/Shell-script/">Shell script</a>, <a href="/tags/資訊/">資訊</a>, <a href="/tags/Holo話/">Holo話</a>
+    <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/Shell-script/">Shell script</a>, <a href="/tags/資訊/">資訊</a>
   </div>
 
         
