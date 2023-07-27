@@ -1,3 +1,4 @@
+http://yoxem.github.io/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/
 http://yoxem.github.io/2019/10/12/tua7soo3ji7tu5huat4ian2sng3huat4/
 http://yoxem.github.io/2023/07/23/latex-tng-tsua-ian-sng-huat/
 http://yoxem.github.io/2023/07/16/ua-tat-hing-piat-e-li-kai/
@@ -50,10 +51,10 @@ http://yoxem.github.io/2022/07/25/sinsim-kiankhong-vs-bangsiong/
 http://yoxem.github.io/2018/01/24/syntax-rules-kap4-define-syntax-e5le7/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-1/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-2/
-http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-3/
-http://yoxem.github.io/2020/02/14/ti-linux-tsiong-pdf-tshai-sek-tsuan-tso-oo-peh/
 http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7-4/
+http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7/
+http://yoxem.github.io/2020/02/14/ti-linux-tsiong-pdf-tshai-sek-tsuan-tso-oo-peh/
 http://yoxem.github.io/2019/08/01/ti7VSCodeiong7GDBliah8thang8/
 http://yoxem.github.io/2020/09/25/tong5si1tsit8siu2/
 http://yoxem.github.io/2022/01/19/tsap'tsho-e-ue-nng-phinn/
@@ -68,8 +69,8 @@ http://yoxem.github.io/2020/11/02/bo5SNSe5jit8tsi2-6/
 http://yoxem.github.io/2020/12/03/bo5SNSe5jit8tsi2-7/
 http://yoxem.github.io/2020/12/03/bo5SNSe5jit8tsi2-8/
 http://yoxem.github.io/2020/12/03/bo5SNSe5jit8tsi2-9/
-http://yoxem.github.io/2020/12/03/bo5SNSe5jit8tsi2-afterword/
 http://yoxem.github.io/2017/12/31/bo5kiu3siok8e5si5tai7/
+http://yoxem.github.io/2020/12/03/bo5SNSe5jit8tsi2-afterword/
 http://yoxem.github.io/2018/06/25/bo5tiann7e5tsong7thai7/
 http://yoxem.github.io/2016/10/25/bun-apo-limmui-gai-fa/
 http://yoxem.github.io/2017/06/30/eng7tortsiunn7ptt/
@@ -135,10 +136,10 @@ http://yoxem.github.io/2019/05/16/MiseEire/
 http://yoxem.github.io/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/
 http://yoxem.github.io/2015/09/26/Mngkhautiann-e-uihooliok/
 http://yoxem.github.io/2015/07/06/MonPays/
-http://yoxem.github.io/2022/06/10/SerenityOS/
 http://yoxem.github.io/2019/03/18/OrthographyOfMunsterIrish/
-http://yoxem.github.io/2022/12/31/2022-huekoo/
+http://yoxem.github.io/2022/06/10/SerenityOS/
 http://yoxem.github.io/2019/11/10/A-script-to-auto-detect-laptop-battery-and-warning/
+http://yoxem.github.io/2022/12/31/2022-huekoo/
 http://yoxem.github.io/2016/09/22/Bak8sai2kok4/
 http://yoxem.github.io/2016/11/13/Bo5lang5tsi1pin1/
 http://yoxem.github.io/2021/07/05/Clochur0.0.1/
@@ -152,10 +153,10 @@ http://yoxem.github.io/
 http://yoxem.github.io/tags/%E5%B0%8F%E8%AA%AA/
 http://yoxem.github.io/tags/%E4%BA%8C%E3%80%87%E5%9B%9B%E4%BA%94/
 http://yoxem.github.io/tags/%E5%85%AC%E8%B7%AF/
-http://yoxem.github.io/tags/%E7%94%9F%E6%B4%BB/
 http://yoxem.github.io/tags/Shell-script/
 http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/
 http://yoxem.github.io/tags/Holo%E8%A9%B1/
+http://yoxem.github.io/tags/%E7%94%9F%E6%B4%BB/
 http://yoxem.github.io/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/
 http://yoxem.github.io/tags/Clochur/
 http://yoxem.github.io/tags/SILE/
@@ -197,6 +198,8 @@ http://yoxem.github.io/tags/Wiki/
 http://yoxem.github.io/tags/Hexo/
 http://yoxem.github.io/tags/%E5%AD%97%E5%9E%8B/
 http://yoxem.github.io/tags/%E5%8F%B0%EF%BC%8E%E4%B8%AD%E6%95%85%E4%BA%8B/
+http://yoxem.github.io/tags/Appimage/
+http://yoxem.github.io/tags/Rocket/
 http://yoxem.github.io/tags/VSCode/
 http://yoxem.github.io/tags/GooglePhoto/
 http://yoxem.github.io/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/

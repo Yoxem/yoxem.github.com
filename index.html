@@ -93,6 +93,92 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2023-07-27T15:12:20.000Z"><a href="/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/">2023-07-27</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/">在 A2hosting 用 AppImage deploy Rust rocket 這個 framework 的 app</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        
+          <div class="toc" style="font-size: 100%; border-style:solid; border-width 0.1px; border-color: #787878; float: right; width: 25%; padding: 20px;border-width: 1px; border-margin: 10px;margin-left: 10px;margin-bottom: 10px; background: #f6f7f9;"><span style="text-align:center;font-weight:bold;">目錄</span>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%BD%E4%BD%9C%E5%8E%9F%E5%A7%8B%E4%BA%8C%E9%80%B2%E4%BD%8D%E6%AA%94-binary-file"><span class="toc-text">製作原始二進位檔 (binary file)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A4%87%E8%A3%BD%E5%88%B0-AppDir"><span class="toc-text">複製到 AppDir</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%9Dappimage"><span class="toc-text">安裝appimage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8C%85appimage"><span class="toc-text">打包appimage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%A3%93%E7%B8%AE%E7%84%B6%E5%BE%8C%E5%9F%B7%E8%A1%8C"><span class="toc-text">解壓縮然後執行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9-htaccess"><span class="toc-text">修改 .htaccess</span></a></li></ol></li></ol>
+          </div>
+        
+      <p>Rust 的 Rocket 是一個後端框架 (framework)。除了有靜態型別語言的好處（比如減少runtime error）外，還有一個binary檔包全部，免除裝其他太多 library 或是框架 library 的問題。</p>
+<p>因為自己的是網路租用的A2 site hosting 空間(Linux)，想說為了物盡其用，所以想要把產生的 web app binary 放在上面執行，但想當然爾，還是缺相依性（空間提供的函式庫版本太舊）。後來想，既然 AppImage 可以包一個執行檔的諸多相依軟體或是函式庫，為何不用之包呢？</p>
+<p>以下以放在 <code>/path/to/exampleapp</code> 這個 app 為例，講述我 deploy 的方法。</p>
+<h2 id="製作原始二進位檔-binary-file"><a href="#製作原始二進位檔-binary-file" class="headerlink" title="製作原始二進位檔 (binary file)"></a>製作原始二進位檔 (binary file)</h2><p>進入 <code>/path/to/exampleapp</code>，輸入下列 Linux 指令，編譯可執行檔：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cargo +nightly build --release <span class="comment"># 假設app需要 nightly 的 rust 版本</span></span><br><span class="line"></span><br><span class="line">cargo +nightly run --release</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最後應該會在<code>/path/to/exampleapp/target/release</code>找到<code>taikoothong</code>。</p>
+<h2 id="複製到-AppDir"><a href="#複製到-AppDir" class="headerlink" title="複製到 AppDir"></a>複製到 AppDir</h2><p>創立新的<code>/path/to/AppDir</code>，然後把<code>exampleapp</code>複製到這裡：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /path/to/AppDir</span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span> /path/to/exampleapp/target/release/exampleapp /path/to/AppDir</span><br></pre></td></tr></table></figure>
+
+<h2 id="安裝appimage"><a href="#安裝appimage" class="headerlink" title="安裝appimage"></a>安裝appimage</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget -O appimage-builder-x86_64.AppImage https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage</span><br><span class="line"></span><br><span class="line"><span class="built_in">chmod</span> +x appimage-builder-x86_64.AppImage</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">mv</span> appimage-builder-x86_64.AppImage /usr/local/bin/appimage-builder <span class="comment">#可以自己另外指定安裝目錄</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="打包appimage"><a href="#打包appimage" class="headerlink" title="打包appimage"></a>打包appimage</h2><p>進去<code>/path/to/</code>，產生appimage 的打包設定檔，依指示設定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to</span><br><span class="line"></span><br><span class="line">appimage-builder --generate</span><br><span class="line"></span><br><span class="line">&gt; Basic Information :</span><br><span class="line">&gt; ? ID [Eg: com.example.app] : com.example.exampleapp</span><br><span class="line">&gt; ? Application Name : Example</span><br><span class="line">&gt; ? Icon : （直接依照預設值，按enter就好）</span><br><span class="line">&gt; ? Version : 0.0.0</span><br><span class="line">&gt; ? Executable path relative to AppDir [usr/bin/app] : exampleapp （執行檔在目錄裡面的相對位置）</span><br><span class="line">&gt; ? Arguments [Default: <span class="variable">$@</span>] : <span class="variable">$@</span></span><br><span class="line">&gt; ? Update Information [Default: guess] : guess</span><br><span class="line">&gt; ? Architecture :  amd64（請依照平臺所屬的 CPU 架構修改）</span><br></pre></td></tr></table></figure>
+
+<p>最後生成 <code>/path/to/AppImageBuilder.yml</code>，檢視裡面的設定有沒有問題，刪除不必要的<code>sourceline</code>內項目，增加必要的<code>include</code>內 ubuntu 套件等等。</p>
+<p>最後輸入指令打包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">appimage-builder --recipe AppImageBuilder.yml</span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> Example-0.0.0-x86_64.AppImage Example <span class="comment">#把可執行檔包起來</span></span><br><span class="line"><span class="built_in">cp</span> /path/to/exampleapp/templates -r . <span class="comment">#把templates複製過來，如果有其他的檔案一併複製</span></span><br><span class="line"></span><br><span class="line">tar -zcf  examplearchive.tar  templates  Example <span class="comment"># 有其他檔案也要包起來</span></span><br></pre></td></tr></table></figure>
+
+<p>然後把 <code>examplearchive.tar</code> 上傳到site-hosting</p>
+<h2 id="解壓縮然後執行"><a href="#解壓縮然後執行" class="headerlink" title="解壓縮然後執行"></a>解壓縮然後執行</h2><p>因為我的 site-hosting 空間不支援 Linux 的 FUSE，所以在遠端的 site-hosting 空間需要解壓縮AppImage裡面的檔案，然後執行裡面的可執行檔：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /path/to/archive <span class="comment">#進去 examplearchive.tar 所在的目錄</span></span><br><span class="line"></span><br><span class="line">tar -xvf examplearchive.tar</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> examplearchive</span><br><span class="line"></span><br><span class="line">./Example --appimage-extract</span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> squashfs-root</span><br><span class="line"></span><br><span class="line"><span class="built_in">nohup</span> ./AppRun &amp; 執行app，用 <span class="built_in">nohup</span> 確保app在離線後繼續執行</span><br><span class="line"></span><br><span class="line"><span class="comment"># 預設會於 http://127.0.0.1:8000/ 執行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-htaccess"><a href="#修改-htaccess" class="headerlink" title="修改 .htaccess"></a>修改 .htaccess</h3><p>因為a2hosting使用 .htaccess 轉網頁地址假設我們要把 <code>我的網址/example</code>和其下的網頁，轉址到 app 的 <code>http://127.0.0.1:8000/</code>處理，參考 a2hosting 建議的方式設置如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line"></span><br><span class="line">DirectoryIndex disabled</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule ^example$ http://127.0.0.1:8000/ [P,L]</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line">RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line">RewriteRule ^example/(.*)$ http://127.0.0.1:8000/$1 [P,L]</span><br></pre></td></tr></table></figure>
+
+<p>這樣打<code>我的網址/example</code>就能進入自己的app了。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://render.com/docs/deploy-rocket-rust">Deploy a Rust Web App with Rocket</a></li>
+<li><a target="_blank" rel="noopener" href="https://appimage-builder.readthedocs.io/en/latest/intro/install.html">https://appimage-builder.readthedocs.io/en/latest/intro/install.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://appimage-builder.readthedocs.io/en/latest/intro/tutorial.html">https://appimage-builder.readthedocs.io/en/latest/intro/tutorial.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.a2hosting.com/kb/installable-applications/manual-installations/installing-node-js-on-managed-hosting-accounts/">How to install and configure Node.js on managed hosting accounts</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/AppImage/AppImageKit/wiki/FUSE">https://github.com/AppImage/AppImageKit/wiki/FUSE</a></li>
+</ul>
+<script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+
+  </div>
+
+</article>
+
+
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2023-07-23T14:24:14.000Z"><a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/">2023-07-23</a></time>
       
       
@@ -594,60 +680,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2022-07-28T16:00:00.000Z"><a href="/2022/07/29/khong'ia-nih-e-lu'kheh/">2022-07-29</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2022/07/29/khong'ia-nih-e-lu'kheh/">曠野ni̍h ê旅客</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>我是一个曠野裡ê旅客</p>
-<p>跤踏石地　汗流糝滴</p>
-<p>跤ná來ná重</p>
-<p>路愈行愈遠</p>
-      
-    </div>
-    <footer>
-      
-        
-          <div class="alignleft">
-            <a href="/2022/07/29/khong'ia-nih-e-lu'kheh/#more" class="more-link">More...</a>
-          </div>
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-
-  </div>
-
-</article>
-
-
-
-
-
 
 <nav id="pagination">
   
@@ -677,7 +709,7 @@
   <h3 class="title">Categories</h3>
   <ul class="entry">
   
-    <li><a href="/categories/Blog/">Blog</a><small>141</small></li>
+    <li><a href="/categories/Blog/">Blog</a><small>142</small></li>
   
     <li><a href="/categories/上代blog的文章/">上代blog的文章</a><small>5</small></li>
   
@@ -691,6 +723,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/">在 A2hosting 用 AppImage deploy Rust rocket 這個 framework 的 app</a>
+      </li>
     
       <li>
         <a href="/2023/07/23/latex-tng-tsua-ian-sng-huat/">LaTeX斷行演算法</a>
@@ -708,10 +744,6 @@
         <a href="/2023/04/24/mng5khau2tiann5-sua2tsam7/">門口埕記事2：二代機初步完成啟用</a>
       </li>
     
-      <li>
-        <a href="/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/">個人wiki最近更新（2023年1-3月）</a>
-      </li>
-    
   </ul>
 </div>
 
@@ -720,7 +752,7 @@
 <div class="widget tagcloud">
   <h3 class="title">Tag Cloud</h3>
   <div class="entry">
-    <a href="/tags/ActivityPub/" style="font-size: 11.54px;">ActivityPub</a> <a href="/tags/Clochur/" style="font-size: 10px;">Clochur</a> <a href="/tags/Django/" style="font-size: 10.77px;">Django</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/Esperanto/" style="font-size: 10.77px;">Esperanto</a> <a href="/tags/Fediverse/" style="font-size: 10.77px;">Fediverse</a> <a href="/tags/Gaeilge/" style="font-size: 10.77px;">Gaeilge</a> <a href="/tags/GooglePhoto/" style="font-size: 10px;">GooglePhoto</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Holo%E8%A9%B1/" style="font-size: 19.23px;">Holo話</a> <a href="/tags/LLVM/" style="font-size: 10.77px;">LLVM</a> <a href="/tags/Linux/" style="font-size: 10.77px;">Linux</a> <a href="/tags/Pleroma/" style="font-size: 10.77px;">Pleroma</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.31px;">Python</a> <a href="/tags/R-18/" style="font-size: 11.54px;">R-18</a> <a href="/tags/Racket/" style="font-size: 10px;">Racket</a> <a href="/tags/Rust/" style="font-size: 10.77px;">Rust</a> <a href="/tags/SILE/" style="font-size: 10.77px;">SILE</a> <a href="/tags/Scheme/" style="font-size: 13.08px;">Scheme</a> <a href="/tags/Shell-script/" style="font-size: 10px;">Shell script</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/tags/Wiki/" style="font-size: 10.77px;">Wiki</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/%E4%BA%8C%E3%80%87%E5%9B%9B%E4%BA%94/" style="font-size: 16.15px;">二〇四五</a> <a href="/tags/%E4%BF%A1%E4%BB%B0/" style="font-size: 10px;">信仰</a> <a href="/tags/%E5%85%AC%E8%B7%AF/" style="font-size: 13.08px;">公路</a> <a href="/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/" style="font-size: 16.92px;">分行散文或詩</a> <a href="/tags/%E5%8F%B0%EF%BC%8E%E4%B8%AD%E6%95%85%E4%BA%8B/" style="font-size: 13.08px;">台．中故事</a> <a href="/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/" style="font-size: 10px;">型別理論</a> <a href="/tags/%E5%AD%97%E5%9E%8B/" style="font-size: 10px;">字型</a> <a href="/tags/%E5%AE%A2%E5%AE%B6/" style="font-size: 10px;">客家</a> <a href="/tags/%E5%AE%A2%E5%AE%B6%E8%A9%B1/" style="font-size: 10px;">客家話</a> <a href="/tags/%E5%B0%8F%E8%AA%AA/" style="font-size: 20px;">小說</a> <a href="/tags/%E5%B7%B4%E5%A3%AB/" style="font-size: 10.77px;">巴士</a> <a href="/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/" style="font-size: 13.85px;">愛爾蘭語</a> <a href="/tags/%E6%89%93%E5%AD%97%E6%A9%9F/" style="font-size: 10px;">打字機</a> <a href="/tags/%E6%90%AD%E4%B9%98%E7%B4%80%E5%AF%A6/" style="font-size: 10px;">搭乘紀實</a> <a href="/tags/%E6%95%B8%E5%AD%B8/" style="font-size: 10.77px;">數學</a> <a href="/tags/%E6%96%87%E5%85%B7/" style="font-size: 10px;">文具</a> <a href="/tags/%E6%9D%B1%E5%8E%9F%E8%AA%9E/" style="font-size: 10px;">東原語</a> <a href="/tags/%E6%AD%8C%E8%A9%9E/" style="font-size: 11.54px;">歌詞</a> <a href="/tags/%E6%B2%92%E6%9C%89SNS%E7%9A%84%E6%97%A5%E5%AD%90/" style="font-size: 16.92px;">沒有SNS的日子</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 14.62px;">生活</a> <a href="/tags/%E7%9B%B4%E8%AD%AF%E5%99%A8/" style="font-size: 10px;">直譯器</a> <a href="/tags/%E7%B6%AD%E5%9F%BA%E7%99%BE%E7%A7%91/" style="font-size: 10px;">維基百科</a> <a href="/tags/%E8%AB%96/" style="font-size: 17.69px;">論</a> <a href="/tags/%E8%B3%87%E8%A8%8A/" style="font-size: 18.46px;">資訊</a> <a href="/tags/%E8%B3%A3%E5%87%BA%E8%AA%9E%E8%A8%80e%E5%B0%91%E5%B9%B4%E4%BA%BA/" style="font-size: 13.85px;">賣出語言ê少年人</a> <a href="/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/" style="font-size: 10.77px;">門口埕記事</a> <a href="/tags/%E9%9A%A8%E7%AD%86/" style="font-size: 15.38px;">隨筆</a>
+    <a href="/tags/ActivityPub/" style="font-size: 11.54px;">ActivityPub</a> <a href="/tags/Appimage/" style="font-size: 10px;">Appimage</a> <a href="/tags/Clochur/" style="font-size: 10px;">Clochur</a> <a href="/tags/Django/" style="font-size: 10.77px;">Django</a> <a href="/tags/English/" style="font-size: 10px;">English</a> <a href="/tags/Esperanto/" style="font-size: 10.77px;">Esperanto</a> <a href="/tags/Fediverse/" style="font-size: 10.77px;">Fediverse</a> <a href="/tags/Gaeilge/" style="font-size: 10.77px;">Gaeilge</a> <a href="/tags/GooglePhoto/" style="font-size: 10px;">GooglePhoto</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Holo%E8%A9%B1/" style="font-size: 19.23px;">Holo話</a> <a href="/tags/LLVM/" style="font-size: 10.77px;">LLVM</a> <a href="/tags/Linux/" style="font-size: 10.77px;">Linux</a> <a href="/tags/Pleroma/" style="font-size: 10.77px;">Pleroma</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Python/" style="font-size: 12.31px;">Python</a> <a href="/tags/R-18/" style="font-size: 11.54px;">R-18</a> <a href="/tags/Racket/" style="font-size: 10px;">Racket</a> <a href="/tags/Rocket/" style="font-size: 10px;">Rocket</a> <a href="/tags/Rust/" style="font-size: 11.54px;">Rust</a> <a href="/tags/SILE/" style="font-size: 10.77px;">SILE</a> <a href="/tags/Scheme/" style="font-size: 13.08px;">Scheme</a> <a href="/tags/Shell-script/" style="font-size: 10px;">Shell script</a> <a href="/tags/TypeScript/" style="font-size: 10px;">TypeScript</a> <a href="/tags/VSCode/" style="font-size: 10px;">VSCode</a> <a href="/tags/Wiki/" style="font-size: 10.77px;">Wiki</a> <a href="/tags/code/" style="font-size: 10px;">code</a> <a href="/tags/%E4%BA%8C%E3%80%87%E5%9B%9B%E4%BA%94/" style="font-size: 16.15px;">二〇四五</a> <a href="/tags/%E4%BF%A1%E4%BB%B0/" style="font-size: 10px;">信仰</a> <a href="/tags/%E5%85%AC%E8%B7%AF/" style="font-size: 13.08px;">公路</a> <a href="/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/" style="font-size: 16.92px;">分行散文或詩</a> <a href="/tags/%E5%8F%B0%EF%BC%8E%E4%B8%AD%E6%95%85%E4%BA%8B/" style="font-size: 13.08px;">台．中故事</a> <a href="/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/" style="font-size: 10px;">型別理論</a> <a href="/tags/%E5%AD%97%E5%9E%8B/" style="font-size: 10px;">字型</a> <a href="/tags/%E5%AE%A2%E5%AE%B6/" style="font-size: 10px;">客家</a> <a href="/tags/%E5%AE%A2%E5%AE%B6%E8%A9%B1/" style="font-size: 10px;">客家話</a> <a href="/tags/%E5%B0%8F%E8%AA%AA/" style="font-size: 20px;">小說</a> <a href="/tags/%E5%B7%B4%E5%A3%AB/" style="font-size: 10.77px;">巴士</a> <a href="/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/" style="font-size: 13.85px;">愛爾蘭語</a> <a href="/tags/%E6%89%93%E5%AD%97%E6%A9%9F/" style="font-size: 10px;">打字機</a> <a href="/tags/%E6%90%AD%E4%B9%98%E7%B4%80%E5%AF%A6/" style="font-size: 10px;">搭乘紀實</a> <a href="/tags/%E6%95%B8%E5%AD%B8/" style="font-size: 10.77px;">數學</a> <a href="/tags/%E6%96%87%E5%85%B7/" style="font-size: 10px;">文具</a> <a href="/tags/%E6%9D%B1%E5%8E%9F%E8%AA%9E/" style="font-size: 10px;">東原語</a> <a href="/tags/%E6%AD%8C%E8%A9%9E/" style="font-size: 11.54px;">歌詞</a> <a href="/tags/%E6%B2%92%E6%9C%89SNS%E7%9A%84%E6%97%A5%E5%AD%90/" style="font-size: 16.92px;">沒有SNS的日子</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 14.62px;">生活</a> <a href="/tags/%E7%9B%B4%E8%AD%AF%E5%99%A8/" style="font-size: 10px;">直譯器</a> <a href="/tags/%E7%B6%AD%E5%9F%BA%E7%99%BE%E7%A7%91/" style="font-size: 10px;">維基百科</a> <a href="/tags/%E8%AB%96/" style="font-size: 17.69px;">論</a> <a href="/tags/%E8%B3%87%E8%A8%8A/" style="font-size: 18.46px;">資訊</a> <a href="/tags/%E8%B3%A3%E5%87%BA%E8%AA%9E%E8%A8%80e%E5%B0%91%E5%B9%B4%E4%BA%BA/" style="font-size: 13.85px;">賣出語言ê少年人</a> <a href="/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/" style="font-size: 10.77px;">門口埕記事</a> <a href="/tags/%E9%9A%A8%E7%AD%86/" style="font-size: 15.38px;">隨筆</a>
   </div>
 </div>
 
