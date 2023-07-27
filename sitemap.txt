@@ -52,8 +52,8 @@ http://yoxem.github.io/2018/01/24/syntax-rules-kap4-define-syntax-e5le7/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-1/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-2/
 http://yoxem.github.io/2021/06/23/tai5-tiong1koo3su7-3/
-http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7-4/
 http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7/
+http://yoxem.github.io/2021/06/24/tai5-tiong1koo3su7-4/
 http://yoxem.github.io/2020/02/14/ti-linux-tsiong-pdf-tshai-sek-tsuan-tso-oo-peh/
 http://yoxem.github.io/2019/08/01/ti7VSCodeiong7GDBliah8thang8/
 http://yoxem.github.io/2020/09/25/tong5si1tsit8siu2/
@@ -83,8 +83,8 @@ http://yoxem.github.io/2017/01/02/gua2kap4li2it4tit8kiann5/
 http://yoxem.github.io/2017/06/20/ha7che3tsing5e5tsp8gian5/
 http://yoxem.github.io/2017/08/03/ha7jit8hun1lim5/
 http://yoxem.github.io/2022/02/20/ho'iong'e-ke'si/
-http://yoxem.github.io/2020/04/20/ho-lo-ue-e-ku-tiong-lian-siok-pian-tiau/
 http://yoxem.github.io/2021/07/10/hoo7-Rust-iong7-Cairo-kap4-Harfbuzz-ti7-Windows10/
+http://yoxem.github.io/2020/04/20/ho-lo-ue-e-ku-tiong-lian-siok-pian-tiau/
 http://yoxem.github.io/2021/01/04/hue2sio1to2e5tsha5hue2/
 http://yoxem.github.io/2021/01/10/irish-conjugator/
 http://yoxem.github.io/2022/01/17/iu'kuan-ke'sng'tshioh-e-kai'siau/
@@ -118,8 +118,8 @@ http://yoxem.github.io/2022/03/05/Gaeilge-e-copula/
 http://yoxem.github.io/2017/01/15/Gaeilgee5hak8sip8tsu1guan5/
 http://yoxem.github.io/2015/01/03/Hakka_Phak-fa-su_to_Taiwanese_Hakka_Romanization_System/
 http://yoxem.github.io/2018/01/05/Holopediae5POJkau3han3ji7e5pian3uann7/
-http://yoxem.github.io/2015/10/10/Ji7khong3su3ngoo2-10/
 http://yoxem.github.io/2015/10/20/Ji7khong3su3ngoo2-11/
+http://yoxem.github.io/2015/10/10/Ji7khong3su3ngoo2-10/
 http://yoxem.github.io/2016/01/16/Ji7khong3su3ngoo2-12/
 http://yoxem.github.io/2016/09/28/Ji7khong3su3ngoo2-13/
 http://yoxem.github.io/2016/10/04/Ji7khong3su3ngoo2-14/
@@ -136,8 +136,8 @@ http://yoxem.github.io/2019/05/16/MiseEire/
 http://yoxem.github.io/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/
 http://yoxem.github.io/2015/09/26/Mngkhautiann-e-uihooliok/
 http://yoxem.github.io/2015/07/06/MonPays/
-http://yoxem.github.io/2019/03/18/OrthographyOfMunsterIrish/
 http://yoxem.github.io/2022/06/10/SerenityOS/
+http://yoxem.github.io/2019/03/18/OrthographyOfMunsterIrish/
 http://yoxem.github.io/2022/12/31/2022-huekoo/
 http://yoxem.github.io/2019/11/10/A-script-to-auto-detect-laptop-battery-and-warning/
 http://yoxem.github.io/2016/09/22/Bak8sai2kok4/
