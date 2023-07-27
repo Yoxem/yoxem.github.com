@@ -7,7 +7,8 @@
   <meta name="author" content="Yoxem Chen">
   
   <meta name="description" content="Rust 的 Rocket 是一個後端框架 (framework)。除了有靜態型別語言的好處（比如減少runtime error）外，還有一個binary檔包全部，免除裝其他太多 library 或是框架 library 的問題。
-因為自己的是網路租用的A2 site hosting 空間(Linu">
+因為自己的是網路租用的A2 site hosting 空間(Linux)，想說為了物盡其用，所以想要把產生的 web app binary 放在上面執行，但想當然爾，還是缺相依性（空間提供的函式庫版本太舊）。後來想，既然 AppImage 可以包一個執行檔的諸多相依軟體或是函式庫，為何不用之包呢？
+以下以放在 /path/to/exampleapp 這個 app 為例，講述我 deploy 的方法。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,14 +27,14 @@
       "@type": "BlogPosting",
       "headline": "在 A2hosting 用 AppImage deploy Rust rocket 這個 framework 的 app",
        "datePublished": "2023-07-27T23:12:20+08:00",
-       "dateModified" : "2023-07-27T23:14:16+08:00",
+       "dateModified" : "2023-07-27T23:16:14+08:00",
       "author": [{
           "@type": "Person",
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
        "keywords" :    ["資訊","Rust","Appimage","Rocket"] ,
-      "abstract" : "",
+      "abstract" : "Rust 的 Rocket 是一個後端框架 (framework)。除了有靜態型別語言的好處（比如減少runtime error）外，還有一個binary檔包全部，免除裝其他太多 library 或是框架 library 的問題。\n因為自己的是網路租用的A2 site hosting 空間(Linux)，想說為了物盡其用，所以想要把產生的 web app binary 放在上面執行，但想當然爾，還是缺相依性（空間提供的函式庫版本太舊）。後來想，既然 AppImage 可以包一個執行檔的諸多相依軟體或是函式庫，為何不用之包呢？\n以下以放在 /path/to/exampleapp 這個 app 為例，講述我 deploy 的方法。",
       "text" : "Rust 的 Rocket 是一個後端框架 (framework)。除了有靜態型別語言的好處（比如減少runtime error）外，還有一個binary檔包全部，免除裝其他太多 library 或是框架 library 的問題。\n因為自己的是網路租用的A2 site hosting 空間(Linux)，想說為了物盡其用，所以想要把產生的 web app binary 放在上面執行，但想當然爾，還是缺相依性（空間提供的函式庫版本太舊）。後來想，既然 AppImage 可以包一個執行檔的諸多相依軟體或是函式庫，為何不用之包呢？\n以下以放在 /path/to/exampleapp 這個 app 為例，講述我 deploy 的方法。\n製作原始二進位檔 (binary file)進入 /path/to/exampleapp，輸入下列 Linux 指令，編譯可執行檔：\n1234cargo +nightly build --release # 假設app需要 nightly 的 rust 版本cargo +nightly run --release\n\n最後應該會在/path/to/exampleapp/target/release找到taikoothong。\n複製到 AppDir創立新的/path/to/AppDir，然後把exampleapp複製到這裡：\n123mkdir /path/to/AppDircp /path/to/exampleapp/target/release/exampleapp /path/to/AppDir\n\n安裝appimage123456wget -O appimage-builder-x86_64.AppImage https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImagechmod +x appimage-builder-x86_64.AppImagesudo mv appimage-builder-x86_64.AppImage /usr/local/bin/appimage-builder #可以自己另外指定安裝目錄\n\n打包appimage進去/path/to/，產生appimage 的打包設定檔，依指示設定：\n12345678910111213cd /path/toappimage-builder --generate&gt; Basic Information :&gt; ? ID [Eg: com.example.app] : com.example.exampleapp&gt; ? Application Name : Example&gt; ? Icon : （直接依照預設值，按enter就好）&gt; ? Version : 0.0.0&gt; ? Executable path relative to AppDir [usr/bin/app] : exampleapp （執行檔在目錄裡面的相對位置）&gt; ? Arguments [Default: $@] : $@&gt; ? Update Information [Default: guess] : guess&gt; ? Architecture :  amd64（請依照平臺所屬的 CPU 架構修改）\n\n最後生成 /path/to/AppImageBuilder.yml，檢視裡面的設定有沒有問題，刪除不必要的sourceline內項目，增加必要的include內 ubuntu 套件等等。\n最後輸入指令打包\n123456appimage-builder --recipe AppImageBuilder.ymlmv Example-0.0.0-x86_64.AppImage Example #把可執行檔包起來cp /path/to/exampleapp/templates -r . #把templates複製過來，如果有其他的檔案一併複製tar -zcf  examplearchive.tar  templates  Example # 有其他檔案也要包起來\n\n然後把 examplearchive.tar 上傳到site-hosting\n解壓縮然後執行因為我的 site-hosting 空間不支援 Linux 的 FUSE，所以在遠端的 site-hosting 空間需要解壓縮AppImage裡面的檔案，然後執行裡面的可執行檔：\n12345678910111213cd /path/to/archive #進去 examplearchive.tar 所在的目錄tar -xvf examplearchive.tarcd examplearchive./Example --appimage-extractcd squashfs-rootnohup ./AppRun &amp; 執行app，用 nohup 確保app在離線後繼續執行# 預設會於 http://127.0.0.1:8000/ 執行\n\n修改 .htaccess因為a2hosting使用 .htaccess 轉網頁地址假設我們要把 我的網址/example和其下的網頁，轉址到 app 的 http://127.0.0.1:8000/處理，參考 a2hosting 建議的方式設置如下：\n12345678&lt;IfModule mod_rewrite.c&gt;DirectoryIndex disabledRewriteEngine OnRewriteRule ^example$ http://127.0.0.1:8000/ [P,L]RewriteCond %&#123;REQUEST_FILENAME&#125; !-fRewriteCond %&#123;REQUEST_FILENAME&#125; !-dRewriteRule ^example/(.*)$ http://127.0.0.1:8000/$1 [P,L]\n\n這樣打我的網址/example就能進入自己的app了。\n\nDeploy a Rust Web App with Rocket\nhttps://appimage-builder.readthedocs.io/en/latest/intro/install.html\nhttps://appimage-builder.readthedocs.io/en/latest/intro/tutorial.html\nHow to install and configure Node.js on managed hosting accounts\nhttps://github.com/AppImage/AppImageKit/wiki/FUSE\n\n "
     }
     </script>
@@ -112,7 +113,7 @@
         
       <p>Rust 的 Rocket 是一個後端框架 (framework)。除了有靜態型別語言的好處（比如減少runtime error）外，還有一個binary檔包全部，免除裝其他太多 library 或是框架 library 的問題。</p>
 <p>因為自己的是網路租用的A2 site hosting 空間(Linux)，想說為了物盡其用，所以想要把產生的 web app binary 放在上面執行，但想當然爾，還是缺相依性（空間提供的函式庫版本太舊）。後來想，既然 AppImage 可以包一個執行檔的諸多相依軟體或是函式庫，為何不用之包呢？</p>
-<p>以下以放在 <code>/path/to/exampleapp</code> 這個 app 為例，講述我 deploy 的方法。</p>
+<p>以下以放在 <code>/path/to/exampleapp</code> 這個 app 為例，講述我 deploy 的方法。<span id="more"></span></p>
 <h2 id="製作原始二進位檔-binary-file"><a href="#製作原始二進位檔-binary-file" class="headerlink" title="製作原始二進位檔 (binary file)"></a>製作原始二進位檔 (binary file)</h2><p>進入 <code>/path/to/exampleapp</code>，輸入下列 Linux 指令，編譯可執行檔：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cargo +nightly build --release <span class="comment"># 假設app需要 nightly 的 rust 版本</span></span><br><span class="line"></span><br><span class="line">cargo +nightly run --release</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
