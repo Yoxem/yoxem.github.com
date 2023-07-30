@@ -32,7 +32,7 @@
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
-       "keywords" :    ["Holo話","資訊","數學"] ,
+       "keywords" :    ["資訊","Holo話","數學"] ,
       "abstract" : "（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？",
       "text" : "（開始寫 tī 2019-10-11，上新修改 tī 2023-07-26）\n說明設使汝干焦有整數乘法、整數加減法 kap 向正爿徙位 (&gt;&gt;)，而且任何變數無法度用小數 tiông (store) 入去，欲按怎實做除法演算法？\n一个實做大數演算法 ê 方法，是用微積分 ê Newton 法：假使 $N$ 是被除數， $D$ 是除數（$N, D \\in Z , Z &#x3D;  { x \\mid x \\in 𝑵 \\bigcup x&#x3D;0}$），攏是 $a$ 進位數，$length(x) $ 指整數 $x$ tī $a$ 進位數 ê 長度（例：$length(100_{10})&#x3D;3,~length(89_{10}) &#x3D; 2$）。\n咱會當求一个數 $x &#x3D; D^{-1}$，按呢 $N &#x2F; D &#x3D; Nx$ 。閣用 Newton 法 kā $f(x) &#x3D; Dx - 1 $（tī $x&#x3D;1&#x2F;D$ 有解） 求伊ê近倚ê解 $x_k$，tiō 有 $nx_k \\approx N &#x2F; D$ ，mā 近倚商數矣。\n但是有一个問題：$D^{-1}$是小數，欲按怎算 leh？\n一个方法著是 kā $\\frac{1}{D}$ 乘以 $a^p$（就是放大），算出 $\\frac{a^p}{D}$ ê 近似數 $y_k$，按呢 $Ny_k \\approx \\frac{Na^p}{D}$。koh 設定 $ x 向正爿徙 p 位 :&#x3D; x_a \\gg p &#x3D; x &#x2F;&#x2F; a^p$；其中$a &#x2F;&#x2F; b &#x3D; a 除以 b~ê 商數$），就通得著 $Ny_k \\gg p \\approx \\frac{Na^p}{D} &#x2F;&#x2F; a^p \\approx N&#x2F;D$。\n$p$ ê size[sài-suh] 著偌大？我認為參考這篇文章 (pdf)，會 tàng 要求 $\\frac{N}{D} - Nx \\leq 1$，\n而且因為 $N &lt; a^{length(N)}$，tī $N\\neq 0$ ê 時，tiō 有\n$$\\frac{1}{D} - x &lt; a^{-length{N}}$$\n咱欲予 $\\frac{a^p}{D} - xa^p $ tī $\\frac{1}{D} \\neq x$ ê 時，會當用整數加減計算，所以通 kā 設定做 $\\frac{a^p}{D} - xa^p &#x3D; a^p(\\frac{1}{D}-x) &lt; a^1$，按呢比較一下， $a^p &#x3D; a^{1+length(N)}$。所以 $p$ 通設定做 $1+length(N）$。\nBeh 揣 $y_k \\approx \\frac{a^p}{D}$，通用 $f(y) &#x3D; \\frac{1}{y} - \\frac{D}{a^p}（其中 p &#x3D; 1+length(N)）$ kap Newton 法計算伊 ê 近似解。\ntiō有\n$y_{k+1} &#x3D; y_k - \\frac{f(y)}{f’(y)} &#x3D; y_k - \\frac{\\frac{1}{y_k} - \\frac{D}{a^p}}{-y_k^{-2}} &#x3D; 2y_k - \\frac{y_k^2D}{a^p}$。\n（拄開始通設定 $y_0&#x3D;1$）\n會當 kā $\\frac{y_k^2D}{a^p}$ 用 $(y_k^2D)&#x2F;&#x2F;a^p$ 近倚，tiō 有：\n$$y_{k+1} &#x3D; 2y_k - {y_k^2D} &#x2F;&#x2F; {a^p}$$\n範例設定 $N&#x3D;85965, D&#x3D;457, a &#x3D; 10$，愛算出 $N&#x2F;D$ ê商。\n$ y_0 &#x3D; 1 $\n$ y_1 &#x3D;  2y_0 - y_0^2D &#x2F;&#x2F; 10^{length(N)+1} &#x3D; 2y_0 - {457{y_0^2}} &#x2F;&#x2F; {10^{6}} &#x3D;  2 $\n$ y_2 &#x3D; 2y_1 - {457{y_1^2}} &#x2F;&#x2F; {10^{6}} &#x3D; 4 $\n$ 照按呢， y_3 &#x3D; 8, y_4 &#x3D; 16, y_5 &#x3D; 32, y_6 &#x3D; 64, y_7 &#x3D; 127, y_8 &#x3D; 247, y_9 &#x3D; 467, y_{10} &#x3D; 835, $\n$ y_{11} &#x3D; 1352, y_{12} &#x3D; 1869, y_{13} &#x3D; 2142, y_{14} &#x3D; 2188, y_{15} &#x3D; 2189, y_{16} &#x3D; 2189$\n因為 $y_{15} &#x3D; y_{16} &#x3D; 2189$，計算結束。所以\n$Ny_{16} &#x3D; 188177385, N&#x2F;&#x2F;D \\approx Ny_{16}&#x2F;&#x2F;a^{1+length(N)} &#x3D; 188。$\n比較 $N&#x2F;D \\approx 188.10722100656454（所以N&#x2F;&#x2F;D &#x3D; 188）$，合結果。\n毋過因為用求商符號代表整除符號會致到輸出出現誤差，使用 ê 時著注意。\n "
     }
@@ -150,7 +150,7 @@
         
   
   <div class="tags">
-    <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/資訊/">資訊</a>, <a href="/tags/數學/">數學</a>
+    <a href="/tags/資訊/">資訊</a>, <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/數學/">數學</a>
   </div>
 
         
@@ -198,7 +198,7 @@
   <form name="search_form" action="//google.com/search" method="get" accept-charset="utf-8" class="search-form" onsubmit="search_form.q.value = search_form.hq.value + search_form.q.value "><!-- the source code in the line is modified from RobG's under CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/) -->
     <input type="search" name="hq" results="0" value="" placeholder="Search" class="search-form-input">
 	<!-- custom add the url of yoxem's old blog -->
-<input name="q" type="hidden" value=" site:yoxem.github.io OR site:yoxemblog.wordpress.com">
+<input name="q" type="hidden" value=" site:blog.kianting.info OR site:yoxemblog.wordpress.com">
 
 
 
@@ -273,7 +273,7 @@ Plurk</a></li>
 Mastodon (g0v.social)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.flickr.com/photos/yoxem/sets/">
 Flickr 相簿（舊）</a></li>
-<li><em><a href="http://yoxem.github.io/pages/index.html">
+<li><em><a target="_blank" rel="noopener" href="http://yoxem.github.io/pages/index.html">
 其他 (Yoxem's Homepage)……</a></em></li>
 </ul>
 </div>

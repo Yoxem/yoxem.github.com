@@ -249,7 +249,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    path(&#x27;admin/&#x27;, admin.site.urls),</span><br><span class="line">    path(&#x27;users/&lt;username&gt;&#x27;, views.user_info),</span><br><span class="line">    path(&#x27;.well-known/webfinger&#x27;, views.webfinger),</span><br><span class="line">    path(&#x27;users/&lt;username&gt;/inbox&#x27;, views.inbox), # 收信匣</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <p>開啓<code>activitypub_test/views.py</code>，建立<code>ibox</code>函數，當做收信匣。另外我們把收到的信息存在 <code>inbox_log.txt</code> 裏面：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@csrf_exempt # 不要進行 csrf token 檢查</span><br><span class="line">def inbox(request, username):</span><br><span class="line">    # 預設傳訊息的 inbox 使用 POST 方法</span><br><span class="line">    if request.method == &#x27;POST&#x27;:</span><br><span class="line">        log = open(&#x27;inbox_log.txt&#x27;, &#x27;a&#x27;) # 打開 inbox_log.txt 這個 log</span><br><span class="line">        </span><br><span class="line">		    # 如果不是 alice，回傳找不到</span><br><span class="line">        if username != default_user_name:</span><br><span class="line">            HttpResponseNotFound(&quot;can&#x27;t get the inbox&quot;)</span><br><span class="line"></span><br><span class="line">        header = request.headers # request 的 header</span><br><span class="line">        data = request.body # request 的內容</span><br><span class="line"></span><br><span class="line">        # 將 request 的內容寫在 log 裏面，然後關掉：</span><br><span class="line">        text = f&#x27;message:\n&#123;header&#125; \n&#123;data&#125;\n&#x27;</span><br><span class="line">        log.write(text)</span><br><span class="line">        log.close()</span><br><span class="line">		</span><br><span class="line">        # 最後回傳 OK</span><br><span class="line">        return HttpResponse(&quot;OK&quot;)</span><br><span class="line">	  #其他情況回傳找不到</span><br><span class="line">    else:</span><br><span class="line">        return HttpResponseNotFound(&quot;can&#x27;t get the inbox&quot;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="如何寄送跟隨請求？"><a href="#如何寄送跟隨請求？" class="headerlink" title="如何寄送跟隨請求？"></a>如何寄送跟隨請求？</h3><p><a href="https://yoxem.github.io/2022/11/22/activitypub-e-tshiok-thoo'muai-e-sim'tit">可參後文</a></p>
+<h3 id="如何寄送跟隨請求？"><a href="#如何寄送跟隨請求？" class="headerlink" title="如何寄送跟隨請求？"></a>如何寄送跟隨請求？</h3><p><a target="_blank" rel="noopener" href="https://yoxem.github.io/2022/11/22/activitypub-e-tshiok-thoo'muai-e-sim'tit">可參後文</a></p>
 <h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/timmot/activity-pub-tutorial">timmot &#x2F;activity-pub-tutorial</a></li>
 <li><a target="_blank" rel="noopener" href="https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview">Install and configure Nginx</a></li>
@@ -323,7 +323,7 @@
   <form name="search_form" action="//google.com/search" method="get" accept-charset="utf-8" class="search-form" onsubmit="search_form.q.value = search_form.hq.value + search_form.q.value "><!-- the source code in the line is modified from RobG's under CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/) -->
     <input type="search" name="hq" results="0" value="" placeholder="Search" class="search-form-input">
 	<!-- custom add the url of yoxem's old blog -->
-<input name="q" type="hidden" value=" site:yoxem.github.io OR site:yoxemblog.wordpress.com">
+<input name="q" type="hidden" value=" site:blog.kianting.info OR site:yoxemblog.wordpress.com">
 
 
 
@@ -398,7 +398,7 @@ Plurk</a></li>
 Mastodon (g0v.social)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.flickr.com/photos/yoxem/sets/">
 Flickr 相簿（舊）</a></li>
-<li><em><a href="http://yoxem.github.io/pages/index.html">
+<li><em><a target="_blank" rel="noopener" href="http://yoxem.github.io/pages/index.html">
 其他 (Yoxem's Homepage)……</a></em></li>
 </ul>
 </div>

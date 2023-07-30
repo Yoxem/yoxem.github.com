@@ -3,11 +3,11 @@
   <title>北郊獨語 - Yoxem&#39;s Blog</title>
   <icon>https://www.gravatar.com/avatar/fafc36f9ad9550105fc8e295fb570919</icon>
   <subtitle>溪埔的石仔、山嶺的果樹之間，version 3.0</subtitle>
-  <link href="http://yoxem.github.io/atom.xml" rel="self"/>
+  <link href="http://blog.kianting.info/atom.xml" rel="self"/>
   
-  <link href="http://yoxem.github.io/"/>
+  <link href="http://blog.kianting.info/"/>
   <updated>2023-07-27T15:17:20.500Z</updated>
-  <id>http://yoxem.github.io/</id>
+  <id>http://blog.kianting.info/</id>
   
   <author>
     <name>Yoxem Chen</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>在 A2hosting 用 AppImage deploy Rust rocket 這個 framework 的 app</title>
-    <link href="http://yoxem.github.io/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/"/>
-    <id>http://yoxem.github.io/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/</id>
+    <link href="http://blog.kianting.info/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/"/>
+    <id>http://blog.kianting.info/2023/07/27/ti-a2hosting-deploy-rust-rocket-app-ing-imageapp/</id>
     <published>2023-07-27T15:12:20.000Z</published>
     <updated>2023-07-27T15:17:20.500Z</updated>
     
@@ -32,23 +32,23 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
-    <category term="Rust" scheme="http://yoxem.github.io/tags/Rust/"/>
+    <category term="Rust" scheme="http://blog.kianting.info/tags/Rust/"/>
     
-    <category term="Appimage" scheme="http://yoxem.github.io/tags/Appimage/"/>
+    <category term="Appimage" scheme="http://blog.kianting.info/tags/Appimage/"/>
     
-    <category term="Rocket" scheme="http://yoxem.github.io/tags/Rocket/"/>
+    <category term="Rocket" scheme="http://blog.kianting.info/tags/Rocket/"/>
     
   </entry>
   
   <entry>
     <title>LaTeX斷行演算法</title>
-    <link href="http://yoxem.github.io/2023/07/23/latex-tng-tsua-ian-sng-huat/"/>
-    <id>http://yoxem.github.io/2023/07/23/latex-tng-tsua-ian-sng-huat/</id>
+    <link href="http://blog.kianting.info/2023/07/23/latex-tng-tsua-ian-sng-huat/"/>
+    <id>http://blog.kianting.info/2023/07/23/latex-tng-tsua-ian-sng-huat/</id>
     <published>2023-07-23T14:24:14.000Z</published>
     <updated>2023-07-23T15:02:17.129Z</updated>
     
@@ -66,17 +66,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
   </entry>
   
   <entry>
     <title>一個外行對依值型別的理解</title>
-    <link href="http://yoxem.github.io/2023/07/16/ua-tat-hing-piat-e-li-kai/"/>
-    <id>http://yoxem.github.io/2023/07/16/ua-tat-hing-piat-e-li-kai/</id>
+    <link href="http://blog.kianting.info/2023/07/16/ua-tat-hing-piat-e-li-kai/"/>
+    <id>http://blog.kianting.info/2023/07/16/ua-tat-hing-piat-e-li-kai/</id>
     <published>2023-07-16T15:03:52.000Z</published>
     <updated>2023-07-16T17:24:20.176Z</updated>
     
@@ -90,19 +90,19 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
-    <category term="型別理論" scheme="http://yoxem.github.io/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/"/>
+    <category term="型別理論" scheme="http://blog.kianting.info/tags/%E5%9E%8B%E5%88%A5%E7%90%86%E8%AB%96/"/>
     
   </entry>
   
   <entry>
     <title>個人wiki最近更新（2023年4-6月）</title>
-    <link href="http://yoxem.github.io/2023/07/11/ko&#39;jin-wiki-2023-Q2/"/>
-    <id>http://yoxem.github.io/2023/07/11/ko&#39;jin-wiki-2023-Q2/</id>
+    <link href="http://blog.kianting.info/2023/07/11/ko&#39;jin-wiki-2023-Q2/"/>
+    <id>http://blog.kianting.info/2023/07/11/ko&#39;jin-wiki-2023-Q2/</id>
     <published>2023-07-10T16:00:00.000Z</published>
     <updated>2023-07-01T10:48:22.549Z</updated>
     
@@ -118,17 +118,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="Wiki" scheme="http://yoxem.github.io/tags/Wiki/"/>
+    <category term="Wiki" scheme="http://blog.kianting.info/tags/Wiki/"/>
     
   </entry>
   
   <entry>
     <title>門口埕記事2：二代機初步完成啟用</title>
-    <link href="http://yoxem.github.io/2023/04/24/mng5khau2tiann5-sua2tsam7/"/>
-    <id>http://yoxem.github.io/2023/04/24/mng5khau2tiann5-sua2tsam7/</id>
+    <link href="http://blog.kianting.info/2023/04/24/mng5khau2tiann5-sua2tsam7/"/>
+    <id>http://blog.kianting.info/2023/04/24/mng5khau2tiann5-sua2tsam7/</id>
     <published>2023-04-23T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.152Z</updated>
     
@@ -139,21 +139,21 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="Pleroma" scheme="http://yoxem.github.io/tags/Pleroma/"/>
+    <category term="Pleroma" scheme="http://blog.kianting.info/tags/Pleroma/"/>
     
-    <category term="門口埕記事" scheme="http://yoxem.github.io/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/"/>
+    <category term="門口埕記事" scheme="http://blog.kianting.info/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/"/>
     
-    <category term="Fediverse" scheme="http://yoxem.github.io/tags/Fediverse/"/>
+    <category term="Fediverse" scheme="http://blog.kianting.info/tags/Fediverse/"/>
     
   </entry>
   
   <entry>
     <title>個人wiki最近更新（2023年1-3月）</title>
-    <link href="http://yoxem.github.io/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/"/>
-    <id>http://yoxem.github.io/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/</id>
+    <link href="http://blog.kianting.info/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/"/>
+    <id>http://blog.kianting.info/2023/04/15/ko&#39;jin-wiki-tsue&#39;kin-king&#39;sin-2023-Q1/</id>
     <published>2023-04-14T16:00:00.000Z</published>
     <updated>2023-07-01T09:47:31.648Z</updated>
     
@@ -170,17 +170,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="Wiki" scheme="http://yoxem.github.io/tags/Wiki/"/>
+    <category term="Wiki" scheme="http://blog.kianting.info/tags/Wiki/"/>
     
   </entry>
   
   <entry>
     <title>門口埕記事1：用樹莓派 3 運作 Pleroma 要三思</title>
-    <link href="http://yoxem.github.io/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/"/>
-    <id>http://yoxem.github.io/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/</id>
+    <link href="http://blog.kianting.info/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/"/>
+    <id>http://blog.kianting.info/2023/04/10/Mng5khau2tiann5-e5-ui5hoo7liok8/</id>
     <published>2023-04-09T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.140Z</updated>
     
@@ -205,27 +205,27 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
-    <category term="Pleroma" scheme="http://yoxem.github.io/tags/Pleroma/"/>
+    <category term="Pleroma" scheme="http://blog.kianting.info/tags/Pleroma/"/>
     
-    <category term="PostgreSQL" scheme="http://yoxem.github.io/tags/PostgreSQL/"/>
+    <category term="PostgreSQL" scheme="http://blog.kianting.info/tags/PostgreSQL/"/>
     
-    <category term="門口埕記事" scheme="http://yoxem.github.io/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/"/>
+    <category term="門口埕記事" scheme="http://blog.kianting.info/tags/%E9%96%80%E5%8F%A3%E5%9F%95%E8%A8%98%E4%BA%8B/"/>
     
-    <category term="Fediverse" scheme="http://yoxem.github.io/tags/Fediverse/"/>
+    <category term="Fediverse" scheme="http://blog.kianting.info/tags/Fediverse/"/>
     
-    <category term="ActivityPub" scheme="http://yoxem.github.io/tags/ActivityPub/"/>
+    <category term="ActivityPub" scheme="http://blog.kianting.info/tags/ActivityPub/"/>
     
   </entry>
   
   <entry>
     <title>2022 回顧</title>
-    <link href="http://yoxem.github.io/2022/12/31/2022-huekoo/"/>
-    <id>http://yoxem.github.io/2022/12/31/2022-huekoo/</id>
+    <link href="http://blog.kianting.info/2022/12/31/2022-huekoo/"/>
+    <id>http://blog.kianting.info/2022/12/31/2022-huekoo/</id>
     <published>2022-12-30T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.136Z</updated>
     
@@ -250,17 +250,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="生活" scheme="http://yoxem.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="http://blog.kianting.info/tags/%E7%94%9F%E6%B4%BB/"/>
     
   </entry>
   
   <entry>
     <title>ActivityPub 協定的基本踩坑心得（下）</title>
-    <link href="http://yoxem.github.io/2022/11/22/activitypub-e-tshiok-thoo&#39;muai-e-sim&#39;tit/"/>
-    <id>http://yoxem.github.io/2022/11/22/activitypub-e-tshiok-thoo&#39;muai-e-sim&#39;tit/</id>
+    <link href="http://blog.kianting.info/2022/11/22/activitypub-e-tshiok-thoo&#39;muai-e-sim&#39;tit/"/>
+    <id>http://blog.kianting.info/2022/11/22/activitypub-e-tshiok-thoo&#39;muai-e-sim&#39;tit/</id>
     <published>2022-11-21T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.144Z</updated>
     
@@ -273,23 +273,23 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
-    <category term="ActivityPub" scheme="http://yoxem.github.io/tags/ActivityPub/"/>
+    <category term="ActivityPub" scheme="http://blog.kianting.info/tags/ActivityPub/"/>
     
-    <category term="Python" scheme="http://yoxem.github.io/tags/Python/"/>
+    <category term="Python" scheme="http://blog.kianting.info/tags/Python/"/>
     
-    <category term="Django" scheme="http://yoxem.github.io/tags/Django/"/>
+    <category term="Django" scheme="http://blog.kianting.info/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>ActivityPub 協定的基本教學（上）</title>
-    <link href="http://yoxem.github.io/2022/11/20/activitypub-e-kipun-kauhak-1/"/>
-    <id>http://yoxem.github.io/2022/11/20/activitypub-e-kipun-kauhak-1/</id>
+    <link href="http://blog.kianting.info/2022/11/20/activitypub-e-kipun-kauhak-1/"/>
+    <id>http://blog.kianting.info/2022/11/20/activitypub-e-kipun-kauhak-1/</id>
     <published>2022-11-20T15:21:55.000Z</published>
     <updated>2023-06-13T02:14:58.144Z</updated>
     
@@ -304,23 +304,23 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
-    <category term="ActivityPub" scheme="http://yoxem.github.io/tags/ActivityPub/"/>
+    <category term="ActivityPub" scheme="http://blog.kianting.info/tags/ActivityPub/"/>
     
-    <category term="Python" scheme="http://yoxem.github.io/tags/Python/"/>
+    <category term="Python" scheme="http://blog.kianting.info/tags/Python/"/>
     
-    <category term="Django" scheme="http://yoxem.github.io/tags/Django/"/>
+    <category term="Django" scheme="http://blog.kianting.info/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>曠野ni̍h ê旅客</title>
-    <link href="http://yoxem.github.io/2022/07/29/khong&#39;ia-nih-e-lu&#39;kheh/"/>
-    <id>http://yoxem.github.io/2022/07/29/khong&#39;ia-nih-e-lu&#39;kheh/</id>
+    <link href="http://blog.kianting.info/2022/07/29/khong&#39;ia-nih-e-lu&#39;kheh/"/>
+    <id>http://blog.kianting.info/2022/07/29/khong&#39;ia-nih-e-lu&#39;kheh/</id>
     <published>2022-07-28T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.152Z</updated>
     
@@ -334,19 +334,19 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="分行散文或詩" scheme="http://yoxem.github.io/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/"/>
+    <category term="Holo話" scheme="http://blog.kianting.info/tags/Holo%E8%A9%B1/"/>
     
-    <category term="Holo話" scheme="http://yoxem.github.io/tags/Holo%E8%A9%B1/"/>
+    <category term="分行散文或詩" scheme="http://blog.kianting.info/tags/%E5%88%86%E8%A1%8C%E6%95%A3%E6%96%87%E6%88%96%E8%A9%A9/"/>
     
   </entry>
   
   <entry>
     <title>身心健康和夢想誰輕誰重</title>
-    <link href="http://yoxem.github.io/2022/07/25/sinsim-kiankhong-vs-bangsiong/"/>
-    <id>http://yoxem.github.io/2022/07/25/sinsim-kiankhong-vs-bangsiong/</id>
+    <link href="http://blog.kianting.info/2022/07/25/sinsim-kiankhong-vs-bangsiong/"/>
+    <id>http://blog.kianting.info/2022/07/25/sinsim-kiankhong-vs-bangsiong/</id>
     <published>2022-07-25T14:07:26.000Z</published>
     <updated>2023-06-13T02:14:58.152Z</updated>
     
@@ -364,19 +364,19 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="生活" scheme="http://yoxem.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="http://blog.kianting.info/tags/%E7%94%9F%E6%B4%BB/"/>
     
-    <category term="論" scheme="http://yoxem.github.io/tags/%E8%AB%96/"/>
+    <category term="論" scheme="http://blog.kianting.info/tags/%E8%AB%96/"/>
     
   </entry>
   
   <entry>
     <title>Serenity OS</title>
-    <link href="http://yoxem.github.io/2022/06/10/SerenityOS/"/>
-    <id>http://yoxem.github.io/2022/06/10/SerenityOS/</id>
+    <link href="http://blog.kianting.info/2022/06/10/SerenityOS/"/>
+    <id>http://blog.kianting.info/2022/06/10/SerenityOS/</id>
     <published>2022-06-09T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.140Z</updated>
     
@@ -388,17 +388,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="論" scheme="http://yoxem.github.io/tags/%E8%AB%96/"/>
+    <category term="論" scheme="http://blog.kianting.info/tags/%E8%AB%96/"/>
     
   </entry>
   
   <entry>
     <title>愛爾蘭語的繫詞</title>
-    <link href="http://yoxem.github.io/2022/03/05/Gaeilge-e-copula/"/>
-    <id>http://yoxem.github.io/2022/03/05/Gaeilge-e-copula/</id>
+    <link href="http://blog.kianting.info/2022/03/05/Gaeilge-e-copula/"/>
+    <id>http://blog.kianting.info/2022/03/05/Gaeilge-e-copula/</id>
     <published>2022-03-04T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.140Z</updated>
     
@@ -414,17 +414,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="愛爾蘭語" scheme="http://yoxem.github.io/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/"/>
+    <category term="愛爾蘭語" scheme="http://blog.kianting.info/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/"/>
     
   </entry>
   
   <entry>
     <title>好用的工具，使用於工作上</title>
-    <link href="http://yoxem.github.io/2022/02/20/ho&#39;iong&#39;e-ke&#39;si/"/>
-    <id>http://yoxem.github.io/2022/02/20/ho&#39;iong&#39;e-ke&#39;si/</id>
+    <link href="http://blog.kianting.info/2022/02/20/ho&#39;iong&#39;e-ke&#39;si/"/>
+    <id>http://blog.kianting.info/2022/02/20/ho&#39;iong&#39;e-ke&#39;si/</id>
     <published>2022-02-19T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.148Z</updated>
     
@@ -442,19 +442,19 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="生活" scheme="http://yoxem.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    <category term="生活" scheme="http://blog.kianting.info/tags/%E7%94%9F%E6%B4%BB/"/>
     
-    <category term="資訊" scheme="http://yoxem.github.io/tags/%E8%B3%87%E8%A8%8A/"/>
+    <category term="資訊" scheme="http://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
     
   </entry>
   
   <entry>
     <title>我的個人維基和愛爾蘭語詩翻譯</title>
-    <link href="http://yoxem.github.io/2022/02/11/gua-e-wiki-kap-ai&#39;ni&#39;lan&#39;gi-si-huan&#39;ik/"/>
-    <id>http://yoxem.github.io/2022/02/11/gua-e-wiki-kap-ai&#39;ni&#39;lan&#39;gi-si-huan&#39;ik/</id>
+    <link href="http://blog.kianting.info/2022/02/11/gua-e-wiki-kap-ai&#39;ni&#39;lan&#39;gi-si-huan&#39;ik/"/>
+    <id>http://blog.kianting.info/2022/02/11/gua-e-wiki-kap-ai&#39;ni&#39;lan&#39;gi-si-huan&#39;ik/</id>
     <published>2022-02-10T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.148Z</updated>
     
@@ -469,17 +469,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="愛爾蘭語" scheme="http://yoxem.github.io/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/"/>
+    <category term="愛爾蘭語" scheme="http://blog.kianting.info/tags/%E6%84%9B%E7%88%BE%E8%98%AD%E8%AA%9E/"/>
     
   </entry>
   
   <entry>
     <title>Wikipedia Library</title>
-    <link href="http://yoxem.github.io/2022/02/04/wiki&#39;pik&#39;kho-library/"/>
-    <id>http://yoxem.github.io/2022/02/04/wiki&#39;pik&#39;kho-library/</id>
+    <link href="http://blog.kianting.info/2022/02/04/wiki&#39;pik&#39;kho-library/"/>
+    <id>http://blog.kianting.info/2022/02/04/wiki&#39;pik&#39;kho-library/</id>
     <published>2022-02-03T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.156Z</updated>
     
@@ -497,17 +497,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="維基百科" scheme="http://yoxem.github.io/tags/%E7%B6%AD%E5%9F%BA%E7%99%BE%E7%A7%91/"/>
+    <category term="維基百科" scheme="http://blog.kianting.info/tags/%E7%B6%AD%E5%9F%BA%E7%99%BE%E7%A7%91/"/>
     
   </entry>
   
   <entry>
     <title>雜錯之語二篇（速記與對話的因子，與科技要不要做影響評估分析）</title>
-    <link href="http://yoxem.github.io/2022/01/19/tsap&#39;tsho-e-ue-nng-phinn/"/>
-    <id>http://yoxem.github.io/2022/01/19/tsap&#39;tsho-e-ue-nng-phinn/</id>
+    <link href="http://blog.kianting.info/2022/01/19/tsap&#39;tsho-e-ue-nng-phinn/"/>
+    <id>http://blog.kianting.info/2022/01/19/tsap&#39;tsho-e-ue-nng-phinn/</id>
     <published>2022-01-18T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.152Z</updated>
     
@@ -519,17 +519,17 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="論" scheme="http://yoxem.github.io/tags/%E8%AB%96/"/>
+    <category term="論" scheme="http://blog.kianting.info/tags/%E8%AB%96/"/>
     
   </entry>
   
   <entry>
     <title>關於計算尺的介紹</title>
-    <link href="http://yoxem.github.io/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/"/>
-    <id>http://yoxem.github.io/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/</id>
+    <link href="http://blog.kianting.info/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/"/>
+    <id>http://blog.kianting.info/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/</id>
     <published>2022-01-16T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.148Z</updated>
     
@@ -542,19 +542,19 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="數學" scheme="http://yoxem.github.io/tags/%E6%95%B8%E5%AD%B8/"/>
+    <category term="數學" scheme="http://blog.kianting.info/tags/%E6%95%B8%E5%AD%B8/"/>
     
-    <category term="文具" scheme="http://yoxem.github.io/tags/%E6%96%87%E5%85%B7/"/>
+    <category term="文具" scheme="http://blog.kianting.info/tags/%E6%96%87%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>我的打字機之旅（主要提Brother 300）</title>
-    <link href="http://yoxem.github.io/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/"/>
-    <id>http://yoxem.github.io/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/</id>
+    <link href="http://blog.kianting.info/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/"/>
+    <id>http://blog.kianting.info/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/</id>
     <published>2021-12-25T16:00:00.000Z</published>
     <updated>2023-06-13T02:14:58.148Z</updated>
     
@@ -568,10 +568,10 @@
     
     
     
-    <category term="Blog" scheme="http://yoxem.github.io/categories/Blog/"/>
+    <category term="Blog" scheme="http://blog.kianting.info/categories/Blog/"/>
     
     
-    <category term="打字機" scheme="http://yoxem.github.io/tags/%E6%89%93%E5%AD%97%E6%A9%9F/"/>
+    <category term="打字機" scheme="http://blog.kianting.info/tags/%E6%89%93%E5%AD%97%E6%A9%9F/"/>
     
   </entry>
   

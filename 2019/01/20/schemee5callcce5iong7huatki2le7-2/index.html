@@ -33,7 +33,7 @@ Coroutine（華語：{rb|協程|hia̍p-tîng} kap 囝程式 (subroutine) 仝款�
           "name": "Yoxem Chen",
           "url": "https://kianting.info"
         }],
-       "keywords" :    ["Holo話","資訊","Scheme"] ,
+       "keywords" :    ["資訊","Holo話","Scheme"] ,
       "abstract" : "（接續頂篇，更新日：2019-01-22）\nCoroutine\nCoroutine（華語：{rb|協程|hia̍p-tîng} kap 囝程式 (subroutine) 仝款，lóng 是 kā 程式分節執行 ê 方法。M̄-koh kap 囝程式有呼叫 kap 受呼叫 ê 關係無仝， coroutine 之間是平等 ê ，會當 tī A coroutine 叫 B coroutine，tī B 內底叫 A coroutine。毋過阮這爿為著簡化，干焦展示「主程式 kap coroutine」ê 關係。",
       "text" : "（接續頂篇，更新日：2019-01-22）\nCoroutine\nCoroutine（華語：協程[hia̍p-tîng] kap 囝程式 (subroutine) 仝款，lóng 是 kā 程式分節執行 ê 方法。M̄-koh kap 囝程式有呼叫 kap 受呼叫 ê 關係無仝， coroutine 之間是平等 ê ，會當 tī A coroutine 叫 B coroutine，tī B 內底叫 A coroutine。毋過阮這爿為著簡化，干焦展示「主程式 kap coroutine」ê 關係。\n\n\nCoroutine 跳來跳去運作 ê 展示，作者：Tevfik AKTUĞLU 佇 Wikimedia Commons，授權：[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)（[引用源](https://commons.wikimedia.org/wiki/File:Coroutine.png)）。\n\n\n而且，執行 coroutine ê 時，會當 kā 跳 kàu 別个 coroutine，執行伊 ê 時陣 mā 通跳轉來原本 ê coroutine，或者是其他 ê 協程 ê 某 mi̍h 部份。 \n佇 Python，協程會當用 generator（產生器）kah yield  ê 方法來做，舉例：\n12345678910111213141516171819#!/usr/bin/env python3#-*-coding: utf-8-*-def coroutine():    x = []    while True:        # append the value input to the array x, then return the yield.        #eg. input = a, x = [], then return [a]        input = (yield x)        x = x + [input]# define coroutineco = coroutine()next(co) # to let the coroutine can execute to the yield part to get the valuefor i in [0,1,2]:    print(&quot;i =&quot;, i)    output = co.send(i) # input something to the routine and get the output    print(&quot;The output of the coroutine =&quot;, output)\n執行結果：\ni = 0The output of the coroutine = [0]i = 1The output of the coroutine = [0, 1]i = 2The output of the coroutine = [0, 1, 2]\n\n有關 tī Scheme 用 call&#x2F;cc 寫產生器 ê 舉例，通參考這篇佇 IThome ê 教學，以下 ê 實例是展講 call&#x2F;cc 通製造通相轉 ê code：\n12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#lang racket(define (coroutine1)  (display &quot;Coroutine 1  part 1\\n&quot;)  ; Coroutine 1 第 1 ê 切換點  (call/cc    (lambda (cc-1-1)      (set! coroutine1 cc-1-1) ; 長 (tióng) 賰 ê beh 計算 ê 部份 (cc-1-1 以後ê部份) kàu coroutine1      (coroutine2) ;跳 kah coroutine2 ê 起頭    ))  (display &quot;Coroutine 1  part 2\\n&quot;)    ; Coroutine 1 第 2 ê 切換點  (call/cc    (lambda (cc-1-2)      (set! coroutine1 cc-1-2)      (coroutine2) ;跳 kàu cc-2-1    ))  ; Coroutine 1 第 3 ê 切換點  (display &quot;Coroutine 1  part 3\\n&quot;)  (call/cc    (lambda (cc-1-3)      ; 長賰 ê 部份 (display &quot;End of coroutine.&quot;) kàu coroutine1      (set! coroutine1 cc-1-3)      (coroutine2)))      (display &quot;End of coroutine.&quot;) ; 結束 coroutine1)(define (coroutine2)  (display &quot;Coroutine 2  part 1\\n&quot;)  (call/cc    (lambda (cc-2-1)      (set! coroutine2 cc-2-1) ;長賰 ê beh 計算ê部份 (cc-2-1 以後) kàu coroutine2      (coroutine1) ; 跳 kàu coroutine1 (cc-1-1)  ))  (display &quot;Coroutine 2  part 2\\n&quot;)  (call/cc    (lambda (cc-2-2)      (set! coroutine2 cc-2-2)      (coroutine1)  ))      (display &quot;Coroutine 2  part 3\\n&quot;)  (call/cc    (lambda (cc-2-3)      (set! coroutine2 cc-2-3)      (coroutine1))) ; 跳 kàu coroutine1 上尾，結束)(coroutine1) ; 對 coroutine1 ê 起頭開始執行\n執行結果：\nCoroutine 1  part 1Coroutine 2  part 1Coroutine 1  part 2Coroutine 2  part 2Coroutine 1  part 3Coroutine 2  part 3End of coroutine.\n咱人會當用 call&#x2F;cc 記錄 coroutine 執行 kàu toh，就 kā 伊 ê 繼續寫 kàu coroutine，閣跳到別个 coroutine （beh 恢復執行 ê 點），來一直切換 coroutine ê 執行。\n結論\ncall/cc 會當 the̍h 來合成真濟控制方法，毋過因為愛 kā 某一个時間 ê 繼續更新 kàu 狀態變數，對追求袂變得 ê 物件 (immutable object) ê 正港 ê 函數式程式設計語言，是有相踏脫[sio-ta̍h-thut] ê 所在，所以準若 Haskell 等「純函數式語言」有這號函數，凡勢功能無遐爾大，我咧臆[ioh]。\n\n用 call&#x2F;cc 可能出現無欲愛 ê 運作，甚至是死循環，tse 愛注意。\n "
     }
@@ -111,7 +111,7 @@ Coroutine（華語：{rb|協程|hia̍p-tîng} kap 囝程式 (subroutine) 仝款�
           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">Coroutine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text">結論</span></a></li></ol>
           </div>
         
-      <p><strong>（接續<a href="http://yoxem.github.io/2019/01/14/schemee5callcce5iong7huatki2le7-1/">頂篇</a>，更新日：2019-01-22）</strong></p>
+      <p><strong>（接續<a target="_blank" rel="noopener" href="http://yoxem.github.io/2019/01/14/schemee5callcce5iong7huatki2le7-1/">頂篇</a>，更新日：2019-01-22）</strong></p>
 <h3>Coroutine</h3>
 Coroutine（華語：<ruby><rb>協程</rb><rp>[</rp><rt>hia̍p-tîng</rt><rp>]</rp></ruby> kap 囝程式 (subroutine) 仝款，lóng 是 kā 程式分節執行 ê 方法。M̄-koh kap 囝程式有呼叫 kap 受呼叫 ê 關係無仝， coroutine 之間是平等 ê ，會當 tī A coroutine 叫 B coroutine，tī B 內底叫 A coroutine。毋過阮這爿為著簡化，干焦展示「主程式 kap coroutine」ê 關係。<span id="more"></span>
 <div style="font-size:70%">
@@ -148,7 +148,7 @@ call/cc 會當 the̍h 來合成真濟控制方法，毋過因為愛 kā 某一�
         
   
   <div class="tags">
-    <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/資訊/">資訊</a>, <a href="/tags/Scheme/">Scheme</a>
+    <a href="/tags/資訊/">資訊</a>, <a href="/tags/Holo話/">Holo話</a>, <a href="/tags/Scheme/">Scheme</a>
   </div>
 
         
@@ -196,7 +196,7 @@ call/cc 會當 the̍h 來合成真濟控制方法，毋過因為愛 kā 某一�
   <form name="search_form" action="//google.com/search" method="get" accept-charset="utf-8" class="search-form" onsubmit="search_form.q.value = search_form.hq.value + search_form.q.value "><!-- the source code in the line is modified from RobG's under CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/) -->
     <input type="search" name="hq" results="0" value="" placeholder="Search" class="search-form-input">
 	<!-- custom add the url of yoxem's old blog -->
-<input name="q" type="hidden" value=" site:yoxem.github.io OR site:yoxemblog.wordpress.com">
+<input name="q" type="hidden" value=" site:blog.kianting.info OR site:yoxemblog.wordpress.com">
 
 
 
@@ -271,7 +271,7 @@ Plurk</a></li>
 Mastodon (g0v.social)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.flickr.com/photos/yoxem/sets/">
 Flickr 相簿（舊）</a></li>
-<li><em><a href="http://yoxem.github.io/pages/index.html">
+<li><em><a target="_blank" rel="noopener" href="http://yoxem.github.io/pages/index.html">
 其他 (Yoxem's Homepage)……</a></em></li>
 </ul>
 </div>
