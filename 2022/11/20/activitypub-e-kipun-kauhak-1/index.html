@@ -185,7 +185,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /etc/nginx/sites-available/activitypub_test.conf /etc/nginx/sites-enabled</span><br><span class="line">nginx -t # 測試設定檔有沒有問題</span><br><span class="line">sudo systemctl restart nginx # 重啓 nginx 服務</span><br></pre></td></tr></table></figure>
 
 <p>嘗試連到 127.0.0.1，應該會出現這個結果，代表正常運作：</p>
-<img src="/blog/2022/11/20/activitypub-e-kipun-kauhak-1/DjangoTestPage.png" class="" title="Django 測試成功畫面">
+<img src="/2022/11/20/activitypub-e-kipun-kauhak-1/DjangoTestPage.png" class="" title="Django 測試成功畫面">
 
 <p>設定防火牆：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw delete allow 8000</span><br><span class="line">sudo ufw allow &#x27;Nginx Full&#x27;</span><br></pre></td></tr></table></figure>
