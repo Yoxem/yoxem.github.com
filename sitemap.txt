@@ -30,8 +30,8 @@ https://blog.kianting.info/2014/12/13/%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%85%AC%E8%B7
 https://blog.kianting.info/2011/07/19/%E8%A7%A3%E6%B1%BA-cx_freeze-%E5%81%9A%E5%87%BA%E7%9A%84-exe-%E6%AA%94%E7%84%A1%E6%B3%95%E5%9C%A8%E4%B8%AD%E6%96%87%E8%B7%AF%E5%BE%91%E4%B8%8B%E5%9F%B7%E8%A1%8C%E7%9A%84%E9%8C%AF%E8%AA%A4/
 https://blog.kianting.info/2017/05/04/juat8thinn1e5am3me5/
 https://blog.kianting.info/2020/03/01/kai-kuat-ubuntu-firefox-tiam-tin-ji-tiong-kan-khia-suann-e-bun-te/
-https://blog.kianting.info/2019/07/16/kai2tui3Ong5Gin5e5tit8ik8khi3/
 https://blog.kianting.info/2016/03/10/kau1kuat4tiau7e5it4tshiat4/
+https://blog.kianting.info/2019/07/16/kai2tui3Ong5Gin5e5tit8ik8khi3/
 https://blog.kianting.info/2022/07/29/khong'ia-nih-e-lu'kheh/
 https://blog.kianting.info/2016/02/15/koan1i5put4cheng5ai3--e5li2iu5/
 https://blog.kianting.info/2021/05/11/kong2tui3sann1tsap8hue3si2khi3beh4tsap8hue3hong9tai5/
@@ -83,8 +83,8 @@ https://blog.kianting.info/2017/01/02/gua2kap4li2it4tit8kiann5/
 https://blog.kianting.info/2017/06/20/ha7che3tsing5e5tsp8gian5/
 https://blog.kianting.info/2017/08/03/ha7jit8hun1lim5/
 https://blog.kianting.info/2022/02/20/ho'iong'e-ke'si/
-https://blog.kianting.info/2020/04/20/ho-lo-ue-e-ku-tiong-lian-siok-pian-tiau/
 https://blog.kianting.info/2021/07/10/hoo7-Rust-iong7-Cairo-kap4-Harfbuzz-ti7-Windows10/
+https://blog.kianting.info/2020/04/20/ho-lo-ue-e-ku-tiong-lian-siok-pian-tiau/
 https://blog.kianting.info/2021/01/04/hue2sio1to2e5tsha5hue2/
 https://blog.kianting.info/2021/01/10/irish-conjugator/
 https://blog.kianting.info/2022/01/17/iu'kuan-ke'sng'tshioh-e-kai'siau/
