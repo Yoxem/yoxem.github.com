@@ -6,7 +6,7 @@
   <link href="https://blog.kianting.info/atom.xml" rel="self"/>
   
   <link href="https://blog.kianting.info/"/>
-  <updated>2023-07-27T15:17:20.500Z</updated>
+  <updated>2023-09-20T16:00:11.411Z</updated>
   <id>https://blog.kianting.info/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>部落格遷移網址，另外不用Disqus討論系統。</title>
+    <link href="https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/"/>
+    <id>https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/</id>
+    <published>2023-09-20T15:28:41.000Z</published>
+    <updated>2023-09-20T16:00:11.411Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="部落格遷移網址"><a href="#部落格遷移網址" class="headerlink" title="部落格遷移網址"></a>部落格遷移網址</h2><p>鑑於整合個人網路與資訊科技資源，並且計劃部分降低對FAANGM數位財團相關資源的使用，所以將部落格遷移到新網址，日後再遷站到自己的門口埕二號機。</p><p>新網址：blog.kianting.info。</p><p>最近也打算更新一下相簿和程式碼倉庫的放置位置，時程未定。初步成果（日後會擴增）如：</p><ul><li><a href="https://gallery.kianting.info/">相簿</a></li><li><a href="https://git.kianting.info/">程式倉庫</a></li></ul><h2 id="停用Disqus討論系統"><a href="#停用Disqus討論系統" class="headerlink" title="停用Disqus討論系統"></a>停用Disqus討論系統</h2><p>鑑於討論量比較低，好幾年不到10條，而且為了安全特性，不用動態部落格，Disqus又有追蹤器（追蹤訪客瀏覽行為的程式）的疑慮，影響使用者權利。經評估，故撤掉Disqus的討論系統。</p><p>以前的迴響存檔如下（PDF），技術限制無法完全備份請海涵：</p><a href="/2023/09/20/blog-sua2-bang7chi2/%E8%BF%B4%E9%9F%BF%E5%AD%98%E6%AA%94.pdf" title="迴響存檔.pdf">迴響存檔.pdf</a><p>感謝大家先前的留言，如果有反饋，可以用電郵聯絡。</p><script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;部落格遷移網址&quot;&gt;&lt;a href=&quot;#部落格遷移網址&quot; class=&quot;headerlink&quot; title=&quot;部落格遷移網址&quot;&gt;&lt;/a&gt;部落格遷移網址&lt;/h2&gt;&lt;p&gt;鑑於整合個人網路與資訊科技資源，並且計劃部分降低對FAANGM數位財團相關資源的使用，所以將部落格遷</summary>
+      
+    
+    
+    
+    
+    <category term="生活" scheme="https://blog.kianting.info/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+    <category term="資訊" scheme="https://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
+    
+  </entry>
   
   <entry>
     <title>在 A2hosting 用 AppImage deploy Rust rocket 這個 framework 的 app</title>
@@ -548,30 +572,6 @@
     <category term="數學" scheme="https://blog.kianting.info/tags/%E6%95%B8%E5%AD%B8/"/>
     
     <category term="文具" scheme="https://blog.kianting.info/tags/%E6%96%87%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我的打字機之旅（主要提Brother 300）</title>
-    <link href="https://blog.kianting.info/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/"/>
-    <id>https://blog.kianting.info/2021/12/26/gua&#39;e-phah&#39;gi&#39;ki-tsi&#39;li/</id>
-    <published>2021-12-25T16:00:00.000Z</published>
-    <updated>2023-06-13T02:14:58.148Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>（原於同日刊於 PTT 文具 [stationery] 板）</strong><br><strong>（更新日期：2023-02-22）</strong></p><p><em>（文長注意，使用 Markdown 格式）</em></p><p>我小時候雖然有玩過家父因大專時課業需要而買來練英打的打字機，但後來不知所終，所以一直以來用電腦或是所寫。</p><p>但最近鑑於自己覺得電腦使用頻率過高，且有點想要練習英語的使用，打算使用打字機作爲文字處理工具，也自己到網路上搜尋有沒有相關的資訊。<span id="more"></span></p><h2 id="仍生產打字機的廠商"><a href="#仍生產打字機的廠商" class="headerlink" title="仍生產打字機的廠商"></a>仍生產打字機的廠商</h2><p>根據最搜尋到的 Fox News 報導，目前還正生產打字機的店家，美國有 Swintec（電動），他們是美國政府採購廠商，透明外殼打字機給監獄使用（爲了避免夾帶違禁品），在亞太地區有生產據點，也有可網購的網站。</p><p>此外，中國媒體有報導，上海一帶有「派順」生產打字機。以前不知道網址，但經過國外網友的回報，這個網站可能是他們的：<a href="https://chinatypewriter.en.alibaba.com/index.html">Shanghai Weilv Mechanism Company</a>，雖然公司名不同。不知道有沒有自有品牌。</p><h2 id="購買打字機的心得"><a href="#購買打字機的心得" class="headerlink" title="購買打字機的心得"></a>購買打字機的心得</h2><p>經過經久尋覓與嘗試，手動打字機有些採買的心得：</p><ul><li>務必放一張A4紙，測試：<ul><li>滾筒與捲紙功能是否正常。</li><li>空白鍵、以及特殊符號能不能用。</li><li>全大寫和全小寫的 “the quick brown fox jumps over the lazy dog.”<br> -　如果是非面交，且賣方允許的話，建議拍攝測試影片或照片。</li></ul></li><li>如果賣方發現有問題，就不要下單。</li></ul><p>因為想要買一臺電動打字機，來瞭解其機制，又希望能夠有還再運作的技術支援，我和 Swintec 這邊的網站有下單，但是貌似無法直接寄到臺灣（雖然應該不是美國禁運品），只能夠找美國有轉運點的代寄公司。</p><p>不過他們的銷售人員似乎怕我買的不透明外殼打字機是給監獄的，還去信和我確認。後來因為一些緣故取消下訂了。</p><p>另外他們的地址選單，有出現香港和中國，但沒有臺灣。這點我已經反映了。</p><h2 id="使用打字機的心得"><a href="#使用打字機的心得" class="headerlink" title="使用打字機的心得"></a>使用打字機的心得</h2><h3 id="手動-Brother-300"><a href="#手動-Brother-300" class="headerlink" title="手動 Brother 300"></a>手動 Brother 300</h3><p>現在這臺手動打字機，是在某網拍網站找到生活範圍附近有人賣日本 Brother 300（形狀照片可以找網拍二手店家搜尋得知），面交而得。</p><p>年代我沒問，但網路上有別的賣家說 1978 年就有此型號，另有說此型號儲藏二十年以上，可以推測應該是 1980s-1990s。</p><h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><p>基本上下列功能正常：</p><ul><li>大小寫、符號</li><li>→退位</li><li>↔右邊界溢位</li><li>左下右下白鍵（無印，Shift）</li><li>左邊中間偏下的白鍵（無印，Caps Lock）</li><li>右側調整「紅、白、黑」的扳柄：<ul><li>因為是黑色單色帶，所以切到紅、黑則顯示黑色</li><li>切到白色時，打字時不會打到色帶，只會留下「活字頭」的壓痕。</li></ul></li><li>左邊的 H - L 扳柄：Reddit r&#x2F;typewriter 板說可以調節清晰度，但可能是色帶舊，感覺不明顯。</li><li>前方滾筒的右邊的水平方向移動扳柄：可用</li><li>左前方換行</li><li>左前方行距（1、1&#x2F;2、2）：我目前只用 1 和 2，使用時正常。</li></ul><h4 id="缺點"><a href="#缺點" class="headerlink" title="缺點"></a>缺點</h4><p>雖然目前用起來功能正常，但還是有一些問題：</p><ul><li>符號太少：這樣無法打某些語言（如法語）的許多附加符號 (diacritic)。但因為我使用白話字&#x2F;臺羅，不可避免會用到許多附加符號，以致只能在音節後面，以聲調數字編號表示聲調，不美觀。或許可能要嘗試越南語打字機？</li><li>打太大力的關係吧，發現色帶有一次脫離印字頭前面的左邊的束勾。</li></ul><h4 id="備考"><a href="#備考" class="headerlink" title="備考"></a>備考</h4><ul><li>之後會買色帶用用看。網拍上有看到據說是通用型的傳統打字機色帶，檢查一下尺寸大致符合，就下單試試看。</li></ul><h4 id="打字效果"><a href="#打字效果" class="headerlink" title="打字效果"></a>打字效果</h4><p>沒圖沒真相，附上測試成果，在 Google 相簿裏面：</p><p><a href="https://photos.app.goo.gl/bfVYPwuRjfU3aXRy6">https://photos.app.goo.gl/bfVYPwuRjfU3aXRy6</a></p><h3 id="電動打字機-Swintec-Electic-Typewriter-2410"><a href="#電動打字機-Swintec-Electic-Typewriter-2410" class="headerlink" title="電動打字機 Swintec Electic Typewriter 2410"></a>電動打字機 Swintec Electic Typewriter 2410</h3><p>還正下訂流程中，所以暫無資料XD。</p><h2 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h2><ol><li>有人在大雅有從事打字機維修，身爲中部人，或許以後可以問看看。</li><li>不知道 WikiHow 的 How to Clean a Typewriter（機械式打字機清潔說明）有沒有用？<ul><li>網址：<a href="https://www.wikihow.com/Clean-a-Typewriter">https://www.wikihow.com/Clean-a-Typewriter</a></li><li>裏面提到白醋、洗碗劑、壓縮空氣屏、刷子、machineary oil、擦拭用酒精 (rubbing alcohol)、香蕉水 (lacquer thinner)、吸塵裝置 (vacuum)。</li></ul></li></ol><script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;strong&gt;（原於同日刊於 PTT 文具 [stationery] 板）&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;（更新日期：2023-02-22）&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;（文長注意，使用 Markdown 格式）&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;我小時候雖然有玩過家父因大專時課業需要而買來練英打的打字機，但後來不知所終，所以一直以來用電腦或是所寫。&lt;/p&gt;
-&lt;p&gt;但最近鑑於自己覺得電腦使用頻率過高，且有點想要練習英語的使用，打算使用打字機作爲文字處理工具，也自己到網路上搜尋有沒有相關的資訊。</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://blog.kianting.info/categories/Blog/"/>
-    
-    
-    <category term="打字機" scheme="https://blog.kianting.info/tags/%E6%89%93%E5%AD%97%E6%A9%9F/"/>
     
   </entry>
   
