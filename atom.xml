@@ -6,7 +6,7 @@
   <link href="https://blog.kianting.info/atom.xml" rel="self"/>
   
   <link href="https://blog.kianting.info/"/>
-  <updated>2023-09-20T16:00:11.411Z</updated>
+  <updated>2023-09-20T17:17:35.881Z</updated>
   <id>https://blog.kianting.info/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/"/>
     <id>https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/</id>
     <published>2023-09-20T15:28:41.000Z</published>
-    <updated>2023-09-20T16:00:11.411Z</updated>
+    <updated>2023-09-20T17:17:35.881Z</updated>
     
     <content type="html"><![CDATA[<h2 id="部落格遷移網址"><a href="#部落格遷移網址" class="headerlink" title="部落格遷移網址"></a>部落格遷移網址</h2><p>鑑於整合個人網路與資訊科技資源，並且計劃部分降低對FAANGM數位財團相關資源的使用，所以將部落格遷移到新網址，日後再遷站到自己的門口埕二號機。</p><p>新網址：blog.kianting.info。</p><p>最近也打算更新一下相簿和程式碼倉庫的放置位置，時程未定。初步成果（日後會擴增）如：</p><ul><li><a href="https://gallery.kianting.info/">相簿</a></li><li><a href="https://git.kianting.info/">程式倉庫</a></li></ul><h2 id="停用Disqus討論系統"><a href="#停用Disqus討論系統" class="headerlink" title="停用Disqus討論系統"></a>停用Disqus討論系統</h2><p>鑑於討論量比較低，好幾年不到10條，而且為了安全特性，不用動態部落格，Disqus又有追蹤器（追蹤訪客瀏覽行為的程式）的疑慮，影響使用者權利。經評估，故撤掉Disqus的討論系統。</p><p>以前的迴響存檔如下（PDF），技術限制無法完全備份請海涵：</p><a href="/2023/09/20/blog-sua2-bang7chi2/%E8%BF%B4%E9%9F%BF%E5%AD%98%E6%AA%94.pdf" title="迴響存檔.pdf">迴響存檔.pdf</a><p>感謝大家先前的留言，如果有反饋，可以用電郵聯絡。</p><script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>]]></content>
     
@@ -32,6 +32,8 @@
       
     
     
+    
+    <category term="Blog" scheme="https://blog.kianting.info/categories/Blog/"/>
     
     
     <category term="生活" scheme="https://blog.kianting.info/tags/%E7%94%9F%E6%B4%BB/"/>
