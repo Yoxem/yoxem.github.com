@@ -107,13 +107,22 @@
     </header>
     <div class="entry">
       
-        
-      <p>因為有點想要脫離FAANGM的影響（詳見<a href="https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/">前文</a>），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要註冊新帳號，所以就用自架網站和租用的託管主機來安裝。又假設我用</p>
-<script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
+        <p>因為有點想要脫離FAANGM的影響（詳見<a href="https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/">前文</a>），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要在另一個網站註冊新帳號，所以就用自架網站和租用的託管主機來安裝。目前使用以下三個工具，以Clo為案例：</p>
+<ul>
+<li>共筆MediaWiki：簡介專案、彙整錯誤回報列表、其他相關文件也可以放進去（案例）</li>
+<li>郵件論壇(mailing list, Mailman)：用來討論程式使用以及回報錯誤用（案例）</li>
+<li>Nginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo</li>
+</ul>
+<p>因為考慮到其他用戶或出外時的我能夠即時通連錯誤，加上設定mailing list平臺很麻煩，還要和mail transfer agent這種郵件伺服器引擎的安裝打交道，所以使用web hosting託管提供的服務。雖然所提供的Mailman引擎的版本比較老。MediaWiki就用之前的個人維基。</p>
+<p>但是比較麻煩的還有gitweb，雖然可以在線上瀏覽repo程式碼庫，但是設定比較麻煩，所以在此記錄下：
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2023/09/22/gitweb-e5-su2ing7/#more" class="more-link">More...</a>
+          </div>
         
         
       
