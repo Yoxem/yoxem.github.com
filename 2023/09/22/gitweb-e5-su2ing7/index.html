@@ -32,7 +32,7 @@ Nginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo
       "@type": "BlogPosting",
       "headline": "gitweb 的架設使用",
        "datePublished": "2023-09-22T02:42:10+08:00",
-       "dateModified" : "2023-09-22T03:19:26+08:00",
+       "dateModified" : "2023-09-22T03:41:11+08:00",
       "author": [{
           "@type": "Person",
           "name": "Yoxem Chen",
@@ -40,7 +40,7 @@ Nginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo
         }],
        "keywords" :    ["資訊","Git"] ,
       "abstract" : "因為有點想要脫離FAANGM的影響（詳見前文），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要在另一個網站註冊新帳號，所以就用自架網站和租用的託管主機來安裝。目前使用以下三個工具，以Clo為案例：\n\n共筆MediaWiki：簡介專案、彙整錯誤回報列表、其他相關文件也可以放進去（案例）\n郵件論壇(mailing list, Mailman)：用來討論程式使用以及回報錯誤用（案例）\nNginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo\n\n因為考慮到其他用戶或出外時的我能夠即時通連錯誤，加上設定mailing list平臺很麻煩，還要和mail transfer agent這種郵件伺服器引擎的安裝打交道，所以使用web hosting託管提供的服務。雖然所提供的Mailman引擎的版本比較老。MediaWiki就用之前的個人維基。\n但是比較麻煩的還有gitweb，雖然可以在線上瀏覽repo程式碼庫，但是設定比較麻煩，所以在此記錄下：",
-      "text" : "因為有點想要脫離FAANGM的影響（詳見前文），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要在另一個網站註冊新帳號，所以就用自架網站和租用的託管主機來安裝。目前使用以下三個工具，以Clo為案例：\n\n共筆MediaWiki：簡介專案、彙整錯誤回報列表、其他相關文件也可以放進去（案例）\n郵件論壇(mailing list, Mailman)：用來討論程式使用以及回報錯誤用（案例）\nNginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo\n\n因為考慮到其他用戶或出外時的我能夠即時通連錯誤，加上設定mailing list平臺很麻煩，還要和mail transfer agent這種郵件伺服器引擎的安裝打交道，所以使用web hosting託管提供的服務。雖然所提供的Mailman引擎的版本比較老。MediaWiki就用之前的個人維基。\n但是比較麻煩的還有gitweb，雖然可以在線上瀏覽repo程式碼庫，但是設定比較麻煩，所以在此記錄下：\n設定伺務器端存放 git repo 的資料夾假設我們的軟體專案名稱是 clo，放置所有的軟體專案的目錄是 &#x2F;path&#x2F;to&#x2F;git，則：\n\n設定www-data存取：chown -R www-data:www-data /path/to/git\n\n創立clo目錄，並且建立bare的git repo git init --bare\n\n增加hook的執行指令：\n 1234cd /pat/to/git/clo/hookscp post-update.sample post-update\n\n安裝設定 gitweb\nDebian系發行版安裝方式： sudo apt install gitweb\n設定檔為：/etc/gitweb.conf，修改如下：\n\n$projectroot = &quot;/path/to/git&quot;;\n$feature變數可以調整功能選項，見介紹：https://git-scm.com/docs/gitweb.conf\n設定伺服器若是要讓其他人能夠用 git clone git.example.com/src/clo 下載程式碼，我nginx設定檔(/etc/nginx/site-available/[設定檔.conf])類似如下：\n另外訪客可以用 git.example.com 觀看程式碼，雖然是以前風氣的陽春界面。\n123456789101112131415161718192021222324252627282930server&#123;    server_name git.example.com;   location /index.cgi &#123;    root /usr/share/gitweb/;    include fastcgi_params;    gzip off;    fastcgi_param SCRIPT_NAME $uri;    fastcgi_param GITWEB_CONFIG /etc/gitweb.conf;    fastcgi_pass  unix:/var/run/fcgiwrap.socket;  &#125;  location  /src/ &#123;    alias /path/to/git/;    index index index.htm index.html;    try_files $uri $uri/ =404;&#125;  location / &#123;    root /usr/share/gitweb/;    index index.cgi;    try_files $uri $uri/ =404;&#125;&#125;\n\n如何下載或上傳\n下載方式：git clone git.example.com/src/clo\n上傳方式：\n加入遠端庫：git add remote dest user@example.comk/path/to/git/clo\n更新遠端庫：commit 後，輸入git push dest main。\n\n "
+      "text" : "因為有點想要脫離FAANGM的影響（詳見前文），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要在另一個網站註冊新帳號，所以就用自架網站和租用的託管主機來安裝。目前使用以下三個工具，以Clo為案例：\n\n共筆MediaWiki：簡介專案、彙整錯誤回報列表、其他相關文件也可以放進去（案例）\n郵件論壇(mailing list, Mailman)：用來討論程式使用以及回報錯誤用（案例）\nNginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo\n\n因為考慮到其他用戶或出外時的我能夠即時通連錯誤，加上設定mailing list平臺很麻煩，還要和mail transfer agent這種郵件伺服器引擎的安裝打交道，所以使用web hosting託管提供的服務。雖然所提供的Mailman引擎的版本比較老。MediaWiki就用之前的個人維基。\n但是比較麻煩的還有gitweb，雖然可以在線上瀏覽repo程式碼庫，但是設定比較麻煩，所以在此記錄下：\n設定伺務器端存放 git repo 的資料夾假設我們的軟體專案名稱是 clo，放置所有的軟體專案的目錄是 &#x2F;path&#x2F;to&#x2F;git，則：\n\n設定www-data存取，其中user是自己的帳號：chown -R user:www-data /path/to/git\n\n創立clo目錄，並且建立bare的git repo git init --bare\n\n增加hook的執行指令：\n 1234cd /pat/to/git/clo/hookscp post-update.sample post-update\n\n安裝設定 gitweb\nDebian系發行版安裝方式： sudo apt install gitweb\n設定檔為：/etc/gitweb.conf，修改如下：\n\n$projectroot = &quot;/path/to/git&quot;;\n$feature變數可以調整功能選項，見介紹：https://git-scm.com/docs/gitweb.conf\n設定伺服器若是要讓其他人能夠用 git clone git.example.com/src/clo 下載程式碼，我nginx設定檔(/etc/nginx/site-available/[設定檔.conf])類似如下：\n另外訪客可以用 git.example.com 觀看程式碼，雖然是以前風氣的陽春界面。\n123456789101112131415161718192021222324252627282930server&#123;    server_name git.example.com;   location /index.cgi &#123;    root /usr/share/gitweb/;    include fastcgi_params;    gzip off;    fastcgi_param SCRIPT_NAME $uri;    fastcgi_param GITWEB_CONFIG /etc/gitweb.conf;    fastcgi_pass  unix:/var/run/fcgiwrap.socket;  &#125;  location  /src/ &#123;    alias /path/to/git/;    index index index.htm index.html;    try_files $uri $uri/ =404;&#125;  location / &#123;    root /usr/share/gitweb/;    index index.cgi;    try_files $uri $uri/ =404;&#125;&#125;\n\n如何下載或上傳\n下載方式：git clone git.example.com/src/clo\n上傳方式：\n加入遠端庫：git add remote dest user@example.com/path/to/git/clo\n更新遠端庫：commit 後，輸入git push dest main。\n\n "
     }
     </script>
 
@@ -126,7 +126,7 @@ Nginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo
 <p>但是比較麻煩的還有gitweb，雖然可以在線上瀏覽repo程式碼庫，但是設定比較麻煩，所以在此記錄下：<span id="more"></span></p>
 <h2 id="設定伺務器端存放-git-repo-的資料夾"><a href="#設定伺務器端存放-git-repo-的資料夾" class="headerlink" title="設定伺務器端存放 git repo 的資料夾"></a>設定伺務器端存放 git repo 的資料夾</h2><p>假設我們的軟體專案名稱是 clo，放置所有的軟體專案的目錄是 &#x2F;path&#x2F;to&#x2F;git，則：</p>
 <ol>
-<li><p>設定<code>www-data</code>存取：<code>chown -R www-data:www-data /path/to/git</code></p>
+<li><p>設定<code>www-data</code>存取，其中user是自己的帳號：<code>chown -R user:www-data /path/to/git</code></p>
 </li>
 <li><p>創立<code>clo</code>目錄，並且建立<code>bare</code>的git repo <code>git init --bare</code></p>
 </li>
@@ -146,7 +146,7 @@ Nginx伺服器上的GitWeb：來放置、瀏覽並提供他人下載git的repo
 <h2 id="如何下載或上傳"><a href="#如何下載或上傳" class="headerlink" title="如何下載或上傳"></a>如何下載或上傳</h2><ol>
 <li>下載方式：<code>git clone git.example.com/src/clo</code></li>
 <li>上傳方式：</li>
-<li>加入遠端庫：<code>git add remote dest user@example.comk/path/to/git/clo</code></li>
+<li>加入遠端庫：<code>git add remote dest user@example.com/path/to/git/clo</code></li>
 <li>更新遠端庫：commit 後，輸入<code>git push dest main</code>。</li>
 </ol>
 <script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>
