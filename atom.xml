@@ -6,7 +6,7 @@
   <link href="https://blog.kianting.info/atom.xml" rel="self"/>
   
   <link href="https://blog.kianting.info/"/>
-  <updated>2023-09-20T17:17:35.881Z</updated>
+  <updated>2023-09-21T18:47:43.481Z</updated>
   <id>https://blog.kianting.info/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gitweb 的架設使用</title>
+    <link href="https://blog.kianting.info/2023/09/22/gitweb-e5-su2ing7/"/>
+    <id>https://blog.kianting.info/2023/09/22/gitweb-e5-su2ing7/</id>
+    <published>2023-09-21T18:42:10.000Z</published>
+    <updated>2023-09-21T18:47:43.481Z</updated>
+    
+    <content type="html"><![CDATA[<p>因為有點想要脫離FAANGM的影響（詳見<a href="https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/">前文</a>），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專案，但也不想要註冊新帳號，所以就用自架網站和租用的託管主機來安裝。又假設我用</p><script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;因為有點想要脫離FAANGM的影響（詳見&lt;a href=&quot;https://blog.kianting.info/2023/09/20/blog-sua2-bang7chi2/&quot;&gt;前文&lt;/a&gt;），不想要利用GitHub，又想要仿效SourceHut的方式，來用傳統的方式管理專</summary>
+      
+    
+    
+    
+    
+    <category term="資訊" scheme="https://blog.kianting.info/tags/%E8%B3%87%E8%A8%8A/"/>
+    
+    <category term="Git" scheme="https://blog.kianting.info/tags/Git/"/>
+    
+  </entry>
   
   <entry>
     <title>部落格遷移網址，另外不用Disqus討論系統。</title>
@@ -549,31 +573,6 @@
     
     
     <category term="論" scheme="https://blog.kianting.info/tags/%E8%AB%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>關於計算尺的介紹</title>
-    <link href="https://blog.kianting.info/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/"/>
-    <id>https://blog.kianting.info/2022/01/17/iu&#39;kuan-ke&#39;sng&#39;tshioh-e-kai&#39;siau/</id>
-    <published>2022-01-16T16:00:00.000Z</published>
-    <updated>2023-06-13T02:14:58.148Z</updated>
-    
-    <content type="html"><![CDATA[<p><em>（原於 2022-01-17 張貼於 PTT Stationary（文具）板，後轉到 Math（數學）板）</em></p><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>最近因為好奇前電腦時代的運算方式之一，計算尺，所以買了兩隻計算尺。（一隻富士另一隻輝柏）</p><p>計算尺的原理是，採用 x * y 可以換成 log(x) + log(y) 的原理，將對數間距的刻度，印在兩隻固定，但其中一隻可平行滑動的尺上，利用尺的滑動與刻度的對照，來進行數字的乘除。這是在電腦發明以前的一種計算數字的方式，當然這有一點像是高階的查圖（表）的對應數值計算方式。<span id="more"></span></p><p>現在我手上有的計算尺，是三根平行的尺併在一起，上下兩根固定，中間的可以左右滑動。尺子被透明的，印有垂直細線，且可左右滑動的塑膠殼固定，用來輔助比對子尺之間的刻度用。</p><p>當然，因為對數的限定，所以越大的數，刻度的誤差值會變大。</p><h2 id="刻度介紹"><a href="#刻度介紹" class="headerlink" title="刻度介紹"></a>刻度介紹</h2><p>以我目前有的 Faber-Castell 2&#x2F;83N 爲例（底下是該計算尺的模擬器，中間的子尺可以拖動）：</p><p><a href="https://www.sliderules.org/react/faber_castell_2_83n.html">https://www.sliderules.org/react/faber_castell_2_83n.html</a></p><p>可以看比較基礎運算的的 C、D 刻度，刻度的間距並不相同，反映這隻尺的間距不是照等差尺度排列的。</p><p>以下數字均爲十進位</p><p>假設要計算 32 * 19 這個數字，首先將被乘數 a 和乘數 b 換成 a’ * b’ * 10^(a的位數-1 + b 的位數 - 1)，其中 a’ 和 b’ 介於 [1,10) 之間。</p><p>雖然這個公式比較複雜，但是重點就是，要把被乘數 a 和乘數 b 的小數點移位成介於 1 到 10 的數，且要記得兩數的小數點移多少位，到時計算要補回來。</p><p>這裏要換成 3.2 * 1.9 * 10 ^ 2</p><p>（以下建議大家開計算尺的模擬器，以確知如何運作）</p><p>所以我們要得知 3.2 * 1.9 的結果。</p><p>然後把C尺左右平移，1刻度移到D尺的3.2的位置，這時候讀C尺1.9的位置，對應到D尺的什麼刻度呢？</p><p>我們可以看到大致對應到刻度 6.05~6.10 中間，和計算結果 608（記得將小數點往右移回2位）很接近。</p><p>如果是除法的話。比如說 72 &#x2F; 6 ，那我們可以先換成 7.2 &#x2F; 6 * 10。</p><p>將 C 尺的 7.2 刻度和 D 尺的 6 刻度重合，然後回頭看 D 尺的 1 對應到 C 尺的什麼刻度呢？</p><p>對應的結果是 1.2，再乘以 10，就得到答案 12 了。</p><p>進階用法的還可以算三角函數、平方根，圓周率的乘除等等。</p><p>但感覺比較高深，這裏就不細說了。</p><script type="text/javascript"> var head = document.getElementsByTagName("head"); var link_css = document.createElement('style'); link_css.setAttribute('type', 'text/css'); link_css.innerHTML = ' .css-table1{ display: table; border: none;} .css-tr1{ display:table-row; } .css-td1{ display: table-cell; padding-right: 1ex; }'; document.getElementsByTagName('head')[0].appendChild(link_css);</script>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;&lt;em&gt;（原於 2022-01-17 張貼於 PTT Stationary（文具）板，後轉到 Math（數學）板）&lt;/em&gt;&lt;/p&gt;
-&lt;h2 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; class=&quot;headerlink&quot; title=&quot;原理&quot;&gt;&lt;/a&gt;原理&lt;/h2&gt;&lt;p&gt;最近因為好奇前電腦時代的運算方式之一，計算尺，所以買了兩隻計算尺。（一隻富士另一隻輝柏）&lt;/p&gt;
-&lt;p&gt;計算尺的原理是，採用 x * y 可以換成 log(x) + log(y) 的原理，將對數間距的刻度，印在兩隻固定，但其中一隻可平行滑動的尺上，利用尺的滑動與刻度的對照，來進行數字的乘除。這是在電腦發明以前的一種計算數字的方式，當然這有一點像是高階的查圖（表）的對應數值計算方式。</summary>
-    
-    
-    
-    <category term="Blog" scheme="https://blog.kianting.info/categories/Blog/"/>
-    
-    
-    <category term="數學" scheme="https://blog.kianting.info/tags/%E6%95%B8%E5%AD%B8/"/>
-    
-    <category term="文具" scheme="https://blog.kianting.info/tags/%E6%96%87%E5%85%B7/"/>
     
   </entry>
   
